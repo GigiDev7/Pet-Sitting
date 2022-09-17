@@ -29,8 +29,9 @@ const loginUser = async (email, password) => {
       "Incorrect email or password"
     );
   }
-  const token = createToken(user?._id);
-  return { user, token };
+  user._doc.token = createToken(user?._id);
+
+  return user._doc;
 };
 
 module.exports = { registerUser, loginUser };
