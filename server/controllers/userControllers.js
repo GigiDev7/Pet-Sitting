@@ -1,5 +1,9 @@
 const User = require("../models/userSchema");
-const { registerUser, loginUser } = require("../services/userServices");
+const {
+  registerUser,
+  loginUser,
+  uploadImage,
+} = require("../services/userServices");
 
 const register = async (req, res, next) => {
   try {
@@ -23,4 +27,14 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login };
+const uploadProfileImage = async (req, res, next) => {
+  try {
+    const editedUser = await uploadImage(req.user._id, req.file);
+    const { __v, password, ...user } = editedUser._doc;
+    res.status(201).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, uploadProfileImage };

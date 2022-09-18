@@ -2,6 +2,9 @@ const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const CustomError = require("../utils/customError");
+const multer = require("multer");
+
+const upload = multer({ dest: "UserImages/" });
 
 const createToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
@@ -34,4 +37,12 @@ const loginUser = async (email, password) => {
   return user._doc;
 };
 
-module.exports = { registerUser, loginUser };
+const uploadImage = async (userId, file) => {
+  return User.findByIdAndUpdate(
+    userId,
+    { profileImage: file.path },
+    { new: true }
+  );
+};
+
+module.exports = { registerUser, loginUser, uploadImage };
