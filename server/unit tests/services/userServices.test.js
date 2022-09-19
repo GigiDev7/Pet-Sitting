@@ -60,7 +60,7 @@ describe("user services", () => {
     });
   });
 
-  describe("lign service ERROR", () => {
+  describe("login service ERROR", () => {
     it("should throw error if passwords do not match", async () => {
       User.findOne.mockResolvedValue({ email: "email", password: "password" });
       bcrypt.compare.mockResolvedValue(false);
@@ -73,6 +73,26 @@ describe("user services", () => {
           message: "Incorrect email or password",
         });
       }
+    });
+  });
+
+  describe("upload image service", () => {
+    it("should update user profile image", async () => {
+      User.findByIdAndUpdate.mockResolvedValue({
+        email: "email",
+        password: "password",
+        profileImage: "image",
+      });
+
+      const result = await userServices.uploadImage("userId", {
+        path: "image",
+      });
+
+      expect(result).toEqual({
+        email: "email",
+        password: "password",
+        profileImage: "image",
+      });
     });
   });
 });
