@@ -14,6 +14,12 @@ const req = {
     email: "email",
     password: "password",
   },
+  file: {
+    path: "image.jpeg",
+  },
+  user: {
+    _id: "userId",
+  },
 };
 
 class MockError {
@@ -83,6 +89,44 @@ describe("user controllers", () => {
       } catch (error) {
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ message: "validation error" });
+      }
+    });
+  });
+
+  describe("image upload controller SUCCES", () => {
+    it("should update user profile image", async () => {
+      userServices.uploadImage.mockResolvedValue({
+        _doc: {
+          email: "email",
+          password: "password",
+          profileImage: "image.jpeg",
+        },
+      });
+
+      await userControllers.uploadProfileImage(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith({
+        email: "email",
+        profileImage: "image.jpeg",
+      });
+    });
+  });
+
+  describe("image upload controller ERROR", () => {
+    it("should return error response", async () => {
+      userServices.uploadImage.mockRejectedValue(
+        new MockError("Authorization Error", "authorization error")
+      );
+      const next = jest.fn((err) => errorHandler(err, req, res));
+
+      try {
+        await userControllers.uploadProfileImage(req, res, next);
+      } catch (error) {
+        expect(res.status).toHaveBeenCalledWith(403);
+        expect(res.json).toHaveBeenCalledWith({
+          message: "authorization error",
+        });
       }
     });
   });
