@@ -3,7 +3,10 @@ const jwt = require("jsonwebtoken");
 const CustomError = require("../utils/customError");
 
 exports.protectAuth = (req, res, next) => {
-  if (!req.headers.authorization || !req.headers.authorization.split(" ")[1]) {
+  if (
+    !req?.headers?.authorization ||
+    !req?.headers?.authorization?.split(" ")[1]
+  ) {
     throw new CustomError("Authorization Error", "Authorization failed");
   }
 
