@@ -1,15 +1,19 @@
 <div class="mt-16">
+  <router-outlet></router-outlet>
+
   <div
     class="bg-teal-100 h-[300px] flex items-center flex-col justify-center gap-4"
   >
     <h3 class="text-lg text-gray-700">Can’t find what you’re looking for?</h3>
     <h2 class="text-3xl font-medium">Get in touch</h2>
     <div class="flex gap-6">
-      <button
-        class="flex items-center gap-2 text-white bg-teal-700 hover:bg-teal-600 px-4 py-3 rounded-md"
-      >
-        <mat-icon> mail_outline</mat-icon> Send a message
-      </button>
+      <a href="/help/send-message" target="_blank">
+        <button
+          class="flex items-center gap-2 text-white bg-teal-700 hover:bg-teal-600 px-4 py-3 rounded-md"
+        >
+          <mat-icon> mail_outline</mat-icon> Send a message
+        </button>
+      </a>
       <button
         (click)="openCallModal()"
         class="flex items-center gap-2 text-white bg-teal-700 hover:bg-teal-600 px-4 py-3 rounded-md"

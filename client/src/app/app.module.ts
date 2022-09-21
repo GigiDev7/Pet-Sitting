@@ -9,9 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './footer/footer.component';
 import { HelpPageComponent } from './help-page/help-page.component';
+import { HelpFormComponent } from './help-page/help-form/help-form.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, HeaderComponent, FooterComponent, HelpPageComponent],
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    HeaderComponent,
+    FooterComponent,
+    HelpPageComponent,
+    HelpFormComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

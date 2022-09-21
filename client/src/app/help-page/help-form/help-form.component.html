@@ -1,0 +1,48 @@
+<div class="mb-16">
+  <h1 class="text-3xl font-medium">Send message</h1>
+  <form class="flex flex-col mt-8 gap-8">
+    <div class="flex flex-col w-1/3 gap-3">
+      <label class="text-xl font-medium">What is your question about?</label>
+      <select class="border-gray-400 border-[1px] rounded-md py-2 outline-0">
+        <option>Becoming a Member</option>
+        <option>Existing Member Support</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col w-1/3 gap-3">
+      <label class="text-xl font-medium">Your Email Address</label>
+      <input
+        type="text"
+        class="border-gray-400 border-[1px] rounded-md py-2 outline-0"
+      />
+    </div>
+
+    <div class="flex flex-col w-1/3 gap-3">
+      <label class="text-xl font-medium">Subject</label>
+      <input
+        type="text"
+        class="border-gray-400 border-[1px] rounded-md py-2 outline-0"
+      />
+    </div>
+
+    <div class="flex flex-col w-1/3 gap-3">
+      <label class="text-xl font-medium">Description</label>
+      <textarea
+        rows="{{ 6 }}"
+        class="border-gray-400 border-[1px] rounded-sm outline-0"
+      ></textarea>
+    </div>
+
+    <p class="w-1/3 text-gray-600">
+      Please enter the details of your request. A member of our support staff
+      will respond as soon as possible.
+    </p>
+
+    <button
+      type="submit"
+      class="text-white bg-teal-700 w-fit px-20 py-3 rounded-md hover:bg-teal-600"
+    >
+      Send
+    </button>
+  </form>
+</div>
