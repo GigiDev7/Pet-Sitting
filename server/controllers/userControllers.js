@@ -34,7 +34,9 @@ const refreshToken = async (req, res, next) => {
     const { newAccessToken, newRefreshToken } = await refresh(
       req.body.refreshToken
     );
-    res.status(200).json({ newAccessToken, newRefreshToken });
+    res
+      .status(200)
+      .json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
   } catch (error) {
     next(error);
   }
