@@ -1,0 +1,52 @@
+<div class="mt-16">
+  <div
+    class="bg-teal-100 h-[300px] flex items-center flex-col justify-center gap-4"
+  >
+    <h3 class="text-lg text-gray-700">Can’t find what you’re looking for?</h3>
+    <h2 class="text-3xl font-medium">Get in touch</h2>
+    <div class="flex gap-6">
+      <button
+        class="flex items-center gap-2 text-white bg-teal-700 hover:bg-teal-600 px-4 py-3 rounded-md"
+      >
+        <mat-icon> mail_outline</mat-icon> Send a message
+      </button>
+      <button
+        (click)="openCallModal()"
+        class="flex items-center gap-2 text-white bg-teal-700 hover:bg-teal-600 px-4 py-3 rounded-md"
+      >
+        <mat-icon> call</mat-icon> Call us
+      </button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isCallModalOpen"
+    class="flex flex-col gap-5 bg-white h-[400px] w-[600px] shadow-xl rounded-sm absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 px-10 pt-14"
+  >
+    <mat-icon
+      (click)="closeCallModal()"
+      class="absolute right-2 top-2 text-3xl text-gray-700 hover:text-teal-600 cursor-pointer"
+      >close</mat-icon
+    >
+    <h1 class="text-2xl font-medium">Give us a call</h1>
+    <p class="text-gray-700">
+      We can help anywhere worldwide, so please call the nearest convenient
+      number. We're here 7 days a week, 24/7.
+    </p>
+    <ul class="flex flex-col gap-2 w-full">
+      <li class="flex justify-between w-[30%]">
+        <span>US</span>
+        <p class="text-teal-600">922 222 6162</p>
+      </li>
+      <li class="flex justify-between w-[30%]">
+        <span>FR</span>
+        <p class="text-teal-600">0808 178 5386</p>
+      </li>
+      <li class="flex justify-between w-[30%]">
+        <span>GB</span>
+        <p class="text-teal-600">0808 178 5386</p>
+      </li>
+    </ul>
+    <p class="mt-8">Normal charges from your telecoms provider apply.</p>
+  </div>
+</div>
