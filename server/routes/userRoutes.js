@@ -4,6 +4,7 @@ const {
   login,
   uploadProfileImage,
   refreshToken,
+  logout,
 } = require("../controllers/userControllers");
 const {
   loginValidation,
@@ -41,6 +42,7 @@ const router = express.Router();
 router.route("/register").post(registerValidation, validationHandler, register);
 router.route("/login").post(loginValidation, validationHandler, login);
 router.route("/refreshToken").post(refreshToken);
+router.route("/logout").post(protectAuth, logout);
 router
   .route("/uploadImage")
   .patch(protectAuth, upload.single("profileImage"), uploadProfileImage);

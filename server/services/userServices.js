@@ -41,6 +41,10 @@ const loginUser = async (email, password) => {
   return user._doc;
 };
 
+const logoutUser = (refreshToken) => {
+  return RefreshToken.deleteOne({ refreshToken });
+};
+
 const refresh = async (refreshToken) => {
   let newAccessToken;
   let newRefreshToken;
@@ -79,4 +83,4 @@ const uploadImage = async (userId, file) => {
   );
 };
 
-module.exports = { registerUser, loginUser, uploadImage, refresh };
+module.exports = { registerUser, loginUser, uploadImage, refresh, logoutUser };
