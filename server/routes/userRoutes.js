@@ -3,6 +3,7 @@ const {
   register,
   login,
   uploadProfileImage,
+  refreshToken,
 } = require("../controllers/userControllers");
 const {
   loginValidation,
@@ -39,6 +40,7 @@ const router = express.Router();
 
 router.route("/register").post(registerValidation, validationHandler, register);
 router.route("/login").post(loginValidation, validationHandler, login);
+router.route("/refreshToken").post(refreshToken);
 router
   .route("/uploadImage")
   .patch(protectAuth, upload.single("profileImage"), uploadProfileImage);

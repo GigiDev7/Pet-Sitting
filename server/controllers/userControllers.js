@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   uploadImage,
+  refresh,
 } = require("../services/userServices");
 
 const register = async (req, res, next) => {
@@ -27,6 +28,17 @@ const login = async (req, res, next) => {
   }
 };
 
+const refreshToken = async (req, res, next) => {
+  try {
+    const { newAccessToken, newRefreshToken } = await refresh(
+      req.body.refreshToken
+    );
+    res.status(200).json({ newAccessToken, newRefreshToken });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const uploadProfileImage = async (req, res, next) => {
   try {
     const editedUser = await uploadImage(req.user._id, req.file);
@@ -37,4 +49,4 @@ const uploadProfileImage = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, uploadProfileImage };
+module.exports = { register, login, refreshToken, uploadProfileImage };

@@ -1,12 +1,17 @@
 const User = require("../models/userSchema");
+const RefreshToken = require("../models/refreshTokenSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const CustomError = require("../utils/customError");
 
-const createToken = (userId) => {
+const createAccessToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-    expiresIn: "24h",
+    expiresIn: "15min",
   });
+};
+
+const createRefreshToken = (userId) => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET_REFRESH);
 };
 
 const comparePassowrds = async (password, hashedPassword) => {
@@ -29,9 +34,41 @@ const loginUser = async (email, password) => {
       "Incorrect email or password"
     );
   }
-  user._doc.token = createToken(user?._id);
+  user._doc.accessToken = createAccessToken(user?._id);
+  user._doc.refreshToken = createRefreshToken(user?._id);
+  await RefreshToken.create({ refreshToken: user._doc.refreshToken });
 
   return user._doc;
+};
+
+const refresh = async (refreshToken) => {
+  let newAccessToken;
+  let newRefreshToken;
+
+  if (!refreshToken) {
+    throw new CustomError("Authentication Error", "Authentication Error");
+  }
+
+  const existingRefreshToken = await RefreshToken.findOne({ refreshToken });
+  if (!existingRefreshToken) {
+    throw new CustomError("Authentication Error", "Authentication Error");
+  }
+
+  await jwt.verify(
+    refreshToken,
+    process.env.JWT_SECRET_REFRESH,
+    async (err, decodedData) => {
+      if (err) {
+        throw new CustomError("Authentication Error", "Authentication Error");
+      }
+
+      await RefreshToken.findByIdAndDelete(existingRefreshToken._id);
+      newAccessToken = createAccessToken(decodedData.id);
+      newRefreshToken = createRefreshToken(decodedData.id);
+      await RefreshToken.create({ refreshToken: newRefreshToken });
+    }
+  );
+  return { newAccessToken, newRefreshToken };
 };
 
 const uploadImage = async (userId, file) => {
@@ -42,4 +79,4 @@ const uploadImage = async (userId, file) => {
   );
 };
 
-module.exports = { registerUser, loginUser, uploadImage };
+module.exports = { registerUser, loginUser, uploadImage, refresh };
