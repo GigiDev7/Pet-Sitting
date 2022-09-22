@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { HelpFormComponent } from './help-page/help-form/help-form.component';
 import { NotificationBoxComponent } from './help-page/notification-box/notification-box.component';
+import { TrustSafetyPageComponent } from './trust-safety-page/trust-safety-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NotificationBoxComponent } from './help-page/notification-box/notificat
     HelpPageComponent,
     HelpFormComponent,
     NotificationBoxComponent,
+    TrustSafetyPageComponent,
   ],
   imports: [
     BrowserModule,
