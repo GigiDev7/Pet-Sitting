@@ -3,6 +3,7 @@ const RefreshToken = require("../models/refreshTokenSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const CustomError = require("../utils/customError");
+const HelpMessage = require("../models/helpMessageSchema");
 
 const createAccessToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
@@ -83,4 +84,23 @@ const uploadImage = async (userId, file) => {
   );
 };
 
-module.exports = { registerUser, loginUser, uploadImage, refresh, logoutUser };
+const sendMessage = async (userId, messageData) => {
+  const { email, questionAbout, subject, description } = messageData;
+
+  return HelpMessage.create({
+    email,
+    questionAbout,
+    subject,
+    description,
+    userId,
+  });
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  uploadImage,
+  refresh,
+  logoutUser,
+  sendMessage,
+};

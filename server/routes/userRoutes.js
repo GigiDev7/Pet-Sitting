@@ -5,11 +5,13 @@ const {
   uploadProfileImage,
   refreshToken,
   logout,
+  controlHelpMessages,
 } = require("../controllers/userControllers");
 const {
   loginValidation,
   registerValidation,
 } = require("../middlewares/authValidator");
+const { messageValidator } = require("../middlewares/helpMessageValidator");
 const { validationHandler } = require("../middlewares/validationHandler");
 const { protectAuth } = require("../middlewares/protectAuth");
 
@@ -46,5 +48,9 @@ router.route("/logout").post(protectAuth, logout);
 router
   .route("/uploadImage")
   .patch(protectAuth, upload.single("profileImage"), uploadProfileImage);
+
+router
+  .route("/help-message")
+  .post(messageValidator, validationHandler, protectAuth, controlHelpMessages);
 
 module.exports = router;

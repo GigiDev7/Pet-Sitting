@@ -5,6 +5,7 @@ const {
   uploadImage,
   refresh,
   logoutUser,
+  sendMessage,
 } = require("../services/userServices");
 
 const register = async (req, res, next) => {
@@ -61,4 +62,20 @@ const uploadProfileImage = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, refreshToken, uploadProfileImage, logout };
+const controlHelpMessages = async (req, res, next) => {
+  try {
+    const newMessage = await sendMessage(req.user._id, req.body);
+    res.status(200).json(newMessage);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  refreshToken,
+  uploadProfileImage,
+  logout,
+  controlHelpMessages,
+};
