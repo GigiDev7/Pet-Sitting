@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HelpService } from '../help.service';
 
 @Component({
   selector: 'app-help-form',
@@ -50,10 +51,15 @@ export class HelpFormComponent implements OnInit {
     this.formErrors.descriptionError = '';
     this.formErrors.emailAddressError = '';
     this.formErrors.subjectError = '';
-    console.log(this.helpForm.value);
+
+    const { questionAbout, emailAddress, subject, description } =
+      this.helpForm.value;
+    this.helpService
+      .sendMessage(questionAbout, emailAddress, subject, description)
+      .subscribe();
   };
 
-  constructor() {}
+  constructor(private helpService: HelpService) {}
 
   ngOnInit(): void {}
 }
