@@ -64,7 +64,7 @@ const uploadProfileImage = async (req, res, next) => {
 
 const controlHelpMessages = async (req, res, next) => {
   try {
-    const newMessage = await sendMessage(req.user._id, req.body);
+    const newMessage = await sendMessage(req.body);
     res.status(200).json(newMessage);
   } catch (error) {
     next(error);
