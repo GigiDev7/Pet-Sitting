@@ -72,6 +72,10 @@ export class HelpFormComponent implements OnInit {
       });
   };
 
+  handleNotificationClose(val: boolean) {
+    this.isNotificationBoxShown = val;
+  }
+
   constructor(private helpService: HelpService) {}
 
   ngOnInit(): void {}

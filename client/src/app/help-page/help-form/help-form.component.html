@@ -1,5 +1,6 @@
 <div class="mb-16">
   <app-notification-box
+    (closeNotification)="handleNotificationClose($event)"
     *ngIf="isNotificationBoxShown"
     [isSendingError]="isSendingError"
   ></app-notification-box>

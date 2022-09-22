@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-notification-box',
@@ -7,6 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NotificationBoxComponent implements OnInit {
   @Input() isSendingError!: boolean;
+  @Output() closeNotification = new EventEmitter<boolean>();
+
+  onCloseClick() {
+    this.closeNotification.emit(false);
+  }
 
   constructor() {}
 

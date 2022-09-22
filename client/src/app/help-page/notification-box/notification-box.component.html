@@ -4,7 +4,11 @@
 <div
   class="flex items-center flex-col gap-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[450px] h-[300px] z-20 rounded-md"
 >
-  <mat-icon class="absolute right-2 top-2 cursor-pointer">close</mat-icon>
+  <mat-icon
+    (click)="onCloseClick()"
+    class="absolute right-2 top-2 cursor-pointer"
+    >close</mat-icon
+  >
   <h2 *ngIf="!isSendingError" class="text-2xl mt-[25%] font-medium">
     Message sent successfully!
   </h2>
