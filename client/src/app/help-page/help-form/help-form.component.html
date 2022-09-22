@@ -1,4 +1,8 @@
 <div class="mb-16">
+  <app-notification-box
+    *ngIf="isNotificationBoxShown"
+    [isSendingError]="isSendingError"
+  ></app-notification-box>
   <h1 class="text-3xl font-medium">Send message</h1>
   <form
     (submit)="handleHelpFormSubmit()"

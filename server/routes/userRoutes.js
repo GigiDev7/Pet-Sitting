@@ -51,6 +51,6 @@ router
 
 router
   .route("/help-message")
-  .post(messageValidator, validationHandler, protectAuth, controlHelpMessages);
+  .post(messageValidator, validationHandler, controlHelpMessages);
 
 module.exports = router;

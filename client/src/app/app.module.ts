@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './footer/footer.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { HelpFormComponent } from './help-page/help-form/help-form.component';
+import { NotificationBoxComponent } from './help-page/notification-box/notification-box.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HelpFormComponent } from './help-page/help-form/help-form.component';
     FooterComponent,
     HelpPageComponent,
     HelpFormComponent,
+    NotificationBoxComponent,
   ],
   imports: [
     BrowserModule,

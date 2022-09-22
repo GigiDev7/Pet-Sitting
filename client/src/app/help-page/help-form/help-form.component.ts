@@ -21,6 +21,9 @@ export class HelpFormComponent implements OnInit {
     descriptionError: '',
   };
 
+  public isNotificationBoxShown: boolean = false;
+  public isSendingError: boolean = false;
+
   handleHelpFormSubmit = () => {
     this.formErrors.descriptionError = '';
     this.formErrors.emailAddressError = '';
@@ -56,7 +59,17 @@ export class HelpFormComponent implements OnInit {
       this.helpForm.value;
     this.helpService
       .sendMessage(questionAbout, emailAddress, subject, description)
-      .subscribe();
+      .subscribe({
+        next: (res) => {
+          this.isSendingError = false;
+          this.isNotificationBoxShown = true;
+        },
+        error: (err) => {
+          console.log(err);
+          this.isSendingError = true;
+          this.isNotificationBoxShown = true;
+        },
+      });
   };
 
   constructor(private helpService: HelpService) {}

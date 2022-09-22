@@ -84,7 +84,7 @@ const uploadImage = async (userId, file) => {
   );
 };
 
-const sendMessage = async (userId, messageData) => {
+const sendMessage = async (messageData) => {
   const { email, questionAbout, subject, description } = messageData;
 
   return HelpMessage.create({
@@ -92,7 +92,6 @@ const sendMessage = async (userId, messageData) => {
     questionAbout,
     subject,
     description,
-    userId,
   });
 };
 

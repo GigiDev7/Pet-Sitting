@@ -17,10 +17,10 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userId: {
+  /* userId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
-  },
+  }, */
 });
 
 const HelpMessage = mongoose.model("HelpMessage", messageSchema);

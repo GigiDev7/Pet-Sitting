@@ -1,0 +1,24 @@
+<div
+  class="fixed top-0 bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.6)] z-20"
+></div>
+<div
+  class="flex items-center flex-col gap-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[450px] h-[300px] z-20 rounded-md"
+>
+  <mat-icon class="absolute right-2 top-2 cursor-pointer">close</mat-icon>
+  <h2 *ngIf="!isSendingError" class="text-2xl mt-[25%] font-medium">
+    Message sent successfully!
+  </h2>
+  <h2 *ngIf="isSendingError" class="text-2xl mt-[25%] font-medium">
+    Error, try again later!
+  </h2>
+  <mat-icon
+    *ngIf="!isSendingError"
+    class="text-green-600 text-6xl fixed left-[42%] top-[60%]"
+    >check_circle_outline</mat-icon
+  >
+  <mat-icon
+    *ngIf="isSendingError"
+    class="text-red-500 text-6xl fixed left-[42%] top-[60%]"
+    >error_outline</mat-icon
+  >
+</div>
