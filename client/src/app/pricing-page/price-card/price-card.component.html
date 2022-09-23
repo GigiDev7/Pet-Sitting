@@ -24,10 +24,8 @@
     Stress-free travel with lounge passes and pet care covered
   </p>
   <p class="flex gap-2">
-    <span class="font-medium">US$</span>
-    <span class="font-medium text-4xl">{{
-      type === "premium" ? 259 : type === "standard" ? 199 : 129
-    }}</span>
+    <span class="font-medium">{{ currency }}</span>
+    <span class="font-medium text-4xl">{{ amount }}</span>
     <span class="self-end">/ year</span>
   </p>
   <button

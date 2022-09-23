@@ -4,11 +4,39 @@
       ANNUAL PLANS FOR PET & TRAVEL LOVERS
     </h1>
     <div class="flex">
-      <div class="flex-1"><app-price-card type="premium"></app-price-card></div>
       <div class="flex-1">
-        <app-price-card type="standard"></app-price-card>
+        <app-price-card
+          [currency]="currency"
+          [amount]="premiumAmount"
+          type="premium"
+        ></app-price-card>
       </div>
-      <div class="flex-1"><app-price-card type="basic"></app-price-card></div>
+      <div class="flex-1">
+        <app-price-card
+          [currency]="currency"
+          [amount]="standardAmount"
+          type="standard"
+        ></app-price-card>
+      </div>
+      <div class="flex-1">
+        <app-price-card
+          [currency]="currency"
+          [amount]="basicAmount"
+          type="basic"
+        ></app-price-card>
+      </div>
     </div>
+  </div>
+
+  <div class="flex justify-center mt-12">
+    <select
+      [ngModel]="currency"
+      (input)="handleCurrencyChange($event)"
+      class="text-teal-600 outline-0 bg-transparent w-[300px] border-[1px] border-teal-600 py-2 rounded-sm"
+    >
+      <option value="USD">US Dollars USD</option>
+      <option value="GBP">British Pound Sterling GBP</option>
+      <option value="EUR">European Union Euro EUR</option>
+    </select>
   </div>
 </div>
