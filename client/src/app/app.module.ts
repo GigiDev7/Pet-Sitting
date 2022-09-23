@@ -15,6 +15,7 @@ import { HelpFormComponent } from './help-page/help-form/help-form.component';
 import { NotificationBoxComponent } from './help-page/notification-box/notification-box.component';
 import { TrustSafetyPageComponent } from './trust-safety-page/trust-safety-page.component';
 import { PricingPageComponent } from './pricing-page/pricing-page.component';
+import { PriceCardComponent } from './pricing-page/price-card/price-card.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PricingPageComponent } from './pricing-page/pricing-page.component';
     NotificationBoxComponent,
     TrustSafetyPageComponent,
     PricingPageComponent,
+    PriceCardComponent,
   ],
   imports: [
     BrowserModule,
