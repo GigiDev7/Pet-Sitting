@@ -1,18 +1,45 @@
 <div
-  class="flex flex-col items-center gap-5 bg-white shadow-2xl rounded-md h-[600px] pt-8 border-t-[8px] border-t-gray-300"
+  class="relative flex flex-col items-center gap-6 shadow-2xl rounded-md h-[600px] pt-8 border-t-[8px] border-t-gray-300"
+  [ngClass]="{
+    'bg-teal-300': type === 'standard',
+    'bg-teal-100': type === 'premium',
+    'bg-white': type === 'basic',
+    'border-t-black': type === 'premium'
+  }"
 >
-  <h1 class="font-medium text-3xl">Basic Owner</h1>
-  <p class="text-center w-[80%]">
+  <p
+    *ngIf="type === 'standard'"
+    class="text-white absolute -top-10 rounded-md text-center bg-teal-700 py-2 w-full"
+  >
+    Most Popular
+  </p>
+  <h1 class="font-medium text-3xl">{{ type | titlecase }} Owner</h1>
+  <p *ngIf="type === 'basic'" class="text-center w-[80%]">
     The necessities of worry-free care anytime you go away
+  </p>
+  <p *ngIf="type === 'standard'" class="text-center w-[80%]">
+    Find your ideal sitter fast or your money back
+  </p>
+  <p *ngIf="type === 'premium'" class="text-center w-[80%]">
+    Stress-free travel with lounge passes and pet care covered
   </p>
   <p class="flex gap-2">
     <span class="font-medium">US$</span>
-    <span class="font-medium text-4xl">129</span>
+    <span class="font-medium text-4xl">{{
+      type === "premium" ? 259 : type === "standard" ? 199 : 129
+    }}</span>
     <span class="self-end">/ year</span>
   </p>
   <button
-    class="w-[80%] text-pink-700 border-[1px] border-pink-700 rounded-3xl py-3"
+    [ngClass]="{
+      'bg-pink-700': type !== 'basic',
+      'text-white': type !== 'basic',
+      'text-pink-700': type === 'basic',
+      'hover:bg-pink-600': type !== 'basic',
+      'hover:bg-pink-700 hover:text-white': type === 'basic'
+    }"
+    class="w-[80%] border-[1px] border-pink-700 rounded-3xl py-3"
   >
-    Buy basic owner
+    Buy {{ type }} owner
   </button>
 </div>
