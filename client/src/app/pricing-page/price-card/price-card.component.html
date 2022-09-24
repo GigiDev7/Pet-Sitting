@@ -40,4 +40,23 @@
   >
     Buy {{ type }} owner
   </button>
+
+  <div class="w-[80%] mx-auto flex flex-col gap-5">
+    <div class="flex gap-2">
+      <mat-icon>check_circle_outline</mat-icon>
+      <p>Unlimited pet & home care from verified sitters at no extra cost</p>
+    </div>
+    <div *ngIf="type !== 'basic'" class="flex gap-2">
+      <mat-icon>home</mat-icon>
+      <p>Home & Contents Protection</p>
+    </div>
+    <div *ngIf="type !== 'basic'" class="flex gap-2">
+      <mat-icon>video_call</mat-icon>
+      <p>Free video calls with vets, anytime you need</p>
+    </div>
+    <div *ngIf="type === 'premium'" class="flex gap-2">
+      <mat-icon> phone</mat-icon>
+      <p>Dedicated member support</p>
+    </div>
+  </div>
 </div>
