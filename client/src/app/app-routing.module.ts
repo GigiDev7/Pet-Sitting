@@ -6,6 +6,7 @@ import { HelpFormComponent } from './help-page/help-form/help-form.component';
 import { TrustSafetyPageComponent } from './trust-safety-page/trust-safety-page.component';
 import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.component';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'how-it-works',
     component: HowItWorksPageComponent,
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
   },
 ];
 

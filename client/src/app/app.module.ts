@@ -19,6 +19,7 @@ import { TrustSafetyPageComponent } from './trust-safety-page/trust-safety-page.
 import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { PriceCardComponent } from './pricing-page/price-card/price-card.component';
 import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.component';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.c
     PricingPageComponent,
     PriceCardComponent,
     HowItWorksPageComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
