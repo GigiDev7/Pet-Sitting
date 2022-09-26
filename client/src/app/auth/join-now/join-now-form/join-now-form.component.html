@@ -13,55 +13,169 @@
   <div class="w-[70%] mx-auto flex flex-col items-center pt-16 h-fit">
     <h1 class="text-teal-700 font-semibold text-4xl">BECOME A MEMBER</h1>
 
-    <form class="w-full flex flex-col gap-6 mt-16">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegisterFormSubmit()"
+      class="w-full flex flex-col gap-6 mt-16"
+    >
       <div class="flex flex-col gap-3">
         <label class="font-medium">First name</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('firstname')?.valid &&
+              registerForm.get('firstname')?.touched
+          }"
+          formControlName="firstname"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="text"
         />
+        <span
+          *ngIf="
+            !registerForm.get('firstname')?.valid &&
+            registerForm.get('firstname')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          first name</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Last name</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('lastname')?.valid &&
+              registerForm.get('lastname')?.touched
+          }"
+          formControlName="lastname"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="text"
         />
+        <span
+          *ngIf="
+            !registerForm.get('lastname')?.valid &&
+            registerForm.get('lastname')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          last name</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Date of birth</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('dateOfBirth')?.valid &&
+              registerForm.get('dateOfBirth')?.touched
+          }"
+          formControlName="dateOfBirth"
+          [max]="maxDateRestriction"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="date"
         />
+        <span
+          *ngIf="
+            !registerForm.get('dateOfBirth')?.valid &&
+            registerForm.get('dateOfBirth')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          date of birth</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Location</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('location')?.valid &&
+              registerForm.get('location')?.touched
+          }"
+          formControlName="location"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="text"
         />
+        <span
+          *ngIf="
+            !registerForm.get('location')?.valid &&
+            registerForm.get('location')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          location</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Email</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('email')?.valid &&
+              registerForm.get('email')?.touched
+          }"
+          formControlName="email"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="text"
         />
+        <span
+          *ngIf="
+            !registerForm.get('email')?.valid &&
+            registerForm.get('email')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon
+          >{{
+            registerForm.get("email")?.value
+              ? "Ivalid email address"
+              : "Please enter your email address"
+          }}</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Password</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('password')?.valid &&
+              registerForm.get('password')?.touched
+          }"
+          formControlName="password"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="password"
         />
+        <span
+          *ngIf="
+            !registerForm.get('password')?.valid &&
+            registerForm.get('password')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          password</span
+        >
       </div>
       <div class="flex flex-col gap-3">
         <label class="font-medium">Confirm password</label>
         <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('confirmPassword')?.valid &&
+              registerForm.get('confirmPassword')?.touched
+          }"
+          formControlName="confirmPassword"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="password"
         />
+        <span
+          *ngIf="
+            !registerForm.get('confirmPassword')?.valid &&
+            registerForm.get('confirmPassword')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please confirm
+          password</span
+        >
       </div>
 
       <button
