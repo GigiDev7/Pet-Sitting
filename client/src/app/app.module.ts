@@ -22,6 +22,7 @@ import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.c
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { JoinNowModalComponent } from './auth/join-now/join-now-modal/join-now-modal.component';
 import { JoinNowFormComponent } from './auth/join-now/join-now-form/join-now-form.component';
+import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { JoinNowFormComponent } from './auth/join-now/join-now-form/join-now-for
     LoginPageComponent,
     JoinNowModalComponent,
     JoinNowFormComponent,
+    PrivacyPolicyPageComponent,
   ],
   imports: [
     BrowserModule,

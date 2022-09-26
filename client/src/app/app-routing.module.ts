@@ -7,6 +7,7 @@ import { TrustSafetyPageComponent } from './trust-safety-page/trust-safety-page.
 import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.component';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyPageComponent,
   },
 ];
 
