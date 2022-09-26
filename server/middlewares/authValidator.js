@@ -48,6 +48,14 @@ exports.registerValidation = checkSchema({
       errorMessage: "Date of birth must be a date type",
     },
   },
+  country: {
+    in: ["body"],
+    errorMessage: "Country is required",
+  },
+  city: {
+    in: ["body"],
+    errorMessage: "City is required",
+  },
   memberType: {
     in: ["body"],
     errorMessage: "Member type must be owner or sitter",

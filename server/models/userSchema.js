@@ -34,8 +34,13 @@ const userSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Date of birth is required"],
     },
-    location: {
+    country: {
       type: String,
+      required: [true, "Country is requred"],
+    },
+    city: {
+      type: String,
+      required: [true, "City is required"],
     },
     profileImage: {
       type: String,

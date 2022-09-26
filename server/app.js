@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const { errorHandler } = require("./middlewares/errorHandler");
 const userRouter = require("./routes/userRoutes");
+const countryRouter = require("./routes/countryRoutes");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors({ origin: true }));
 app.use("/UserImages", express.static("UserImages"));
 
 app.use("/user", userRouter);
+app.use("/countries", countryRouter);
 
 app.use(errorHandler);
 
