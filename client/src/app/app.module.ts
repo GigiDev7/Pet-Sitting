@@ -20,6 +20,8 @@ import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { PriceCardComponent } from './pricing-page/price-card/price-card.component';
 import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.component';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { JoinNowModalComponent } from './auth/join-now/join-now-modal/join-now-modal.component';
+import { JoinNowFormComponent } from './auth/join-now/join-now-form/join-now-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { LoginPageComponent } from './auth/login-page/login-page.component';
     PriceCardComponent,
     HowItWorksPageComponent,
     LoginPageComponent,
+    JoinNowModalComponent,
+    JoinNowFormComponent,
   ],
   imports: [
     BrowserModule,
