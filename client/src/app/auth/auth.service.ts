@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   public isJoinModalShown = new BehaviorSubject<boolean>(false);
-  public isJoinFormShown = new BehaviorSubject<boolean>(false);
+  public isJoinFormShown = new BehaviorSubject<boolean>(true);
   public memberType!: string;
 
   public closeJoinModal() {

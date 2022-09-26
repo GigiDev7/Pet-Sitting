@@ -151,8 +151,13 @@
             registerForm.get('password')?.touched
           "
           class="flex items-center text-red-600 gap-2 text-sm"
-          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
-          password</span
+          ><mat-icon class="text-md">error_outline</mat-icon>
+          {{
+            registerForm.get("password")?.value
+              ? "Password must be at least 6
+          characters long"
+              : "Please enter your password"
+          }}</span
         >
       </div>
       <div class="flex flex-col gap-3">
@@ -160,8 +165,9 @@
         <input
           [ngClass]="{
             'border-red-600':
-              !registerForm.get('confirmPassword')?.valid &&
-              registerForm.get('confirmPassword')?.touched
+              (!registerForm.get('confirmPassword')?.valid &&
+                registerForm.get('confirmPassword')?.touched) ||
+              passwordsMatchError
           }"
           formControlName="confirmPassword"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
@@ -169,12 +175,17 @@
         />
         <span
           *ngIf="
-            !registerForm.get('confirmPassword')?.valid &&
-            registerForm.get('confirmPassword')?.touched
+            (!registerForm.get('confirmPassword')?.valid &&
+              registerForm.get('confirmPassword')?.touched) ||
+            passwordsMatchError
           "
           class="flex items-center text-red-600 gap-2 text-sm"
-          ><mat-icon class="text-md">error_outline</mat-icon> Please confirm
-          password</span
+          ><mat-icon class="text-md">error_outline</mat-icon>
+          {{
+            passwordsMatchError
+              ? "Passwords do not match"
+              : "Please confirm password"
+          }}</span
         >
       </div>
 

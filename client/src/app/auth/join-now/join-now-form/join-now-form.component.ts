@@ -10,6 +10,7 @@ import { AuthService } from '../../auth.service';
 })
 export class JoinNowFormComponent implements OnInit, OnDestroy {
   public maxDateRestriction!: string;
+  public passwordsMatchError: boolean = false;
 
   public registerForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -17,7 +18,10 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     dateOfBirth: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
     confirmPassword: new FormControl('', [Validators.required]),
   });
 
@@ -30,7 +34,25 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['login']);
   }
 
-  onRegisterFormSubmit() {}
+  onRegisterFormSubmit() {
+    const {
+      firstname,
+      lastname,
+      dateOfBirth,
+      location,
+      email,
+      password,
+      confirmPassword,
+    } = this.registerForm.value;
+
+    if (password !== confirmPassword) {
+      this.passwordsMatchError = true;
+      return;
+    }
+
+    this.passwordsMatchError = false;
+    console.log(this.registerForm.value);
+  }
 
   constructor(
     private renderer: Renderer2,
