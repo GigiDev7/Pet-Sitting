@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HelpService } from '../help.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-help-form',
   templateUrl: './help-form.component.html',
@@ -59,6 +61,7 @@ export class HelpFormComponent implements OnInit {
       this.helpForm.value;
     this.helpService
       .sendMessage(questionAbout, emailAddress, subject, description)
+      .pipe(untilDestroyed(this))
       .subscribe({
         next: (res) => {
           this.isSendingError = false;

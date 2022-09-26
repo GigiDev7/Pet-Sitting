@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from './currency-converter.service';
 import { forkJoin } from 'rxjs';
+import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-pricing-page',
   templateUrl: './pricing-page.component.html',
@@ -30,14 +32,16 @@ export class PricingPageComponent implements OnInit {
       target.value,
       this.premiumAmount
     );
-    forkJoin([getBasic, getStandard, getPremium]).subscribe({
-      next: (res: any) => {
-        this.basicAmount = Math.round(res[0].result);
-        this.standardAmount = Math.round(res[1].result);
-        this.premiumAmount = Math.round(res[2].result);
-        this.currency = target.value;
-      },
-    });
+    forkJoin([getBasic, getStandard, getPremium])
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (res: any) => {
+          this.basicAmount = Math.round(res[0].result);
+          this.standardAmount = Math.round(res[1].result);
+          this.premiumAmount = Math.round(res[2].result);
+          this.currency = target.value;
+        },
+      });
   }
 
   constructor(private curencyService: CurrencyService) {}
