@@ -4,7 +4,9 @@
 <div
   class="overflow-hidden flex h-[80%] w-[80%] rounded-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 >
-  <mat-icon class="absolute right-6 top-3 text-gray-700 text-4xl cursor-pointer"
+  <mat-icon
+    (click)="onCloseModalClick()"
+    class="absolute right-6 top-3 text-gray-700 text-4xl cursor-pointer"
     >close</mat-icon
   >
   <div class="bg-pink-700 flex-1 p-16">
