@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { CountryService, ICountry } from '../../country.service';
 
 @Component({
   selector: 'app-join-now-form',
@@ -11,6 +12,7 @@ import { AuthService } from '../../auth.service';
 export class JoinNowFormComponent implements OnInit, OnDestroy {
   public maxDateRestriction!: string;
   public passwordsMatchError: boolean = false;
+  public countries: ICountry[] = [];
 
   public registerForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -33,6 +35,19 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
   onLoginClick() {
     this.authService.closeJoinForm();
     this.router.navigate(['login']);
+  }
+
+  onCountryChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+
+    if (!target.value) {
+      this.countries = [];
+      return;
+    }
+
+    this.countries = this.countryService.countries.filter((el) =>
+      el.country.toLowerCase().includes(target.value.toLowerCase())
+    );
   }
 
   onRegisterFormSubmit() {
@@ -58,7 +73,8 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
   constructor(
     private renderer: Renderer2,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private countryService: CountryService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +92,8 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
         ? '0' + maxDate.getMonth()
         : maxDate.getMonth()
     }-${maxDate.getDate()}`;
+
+    this.countryService.getCountries().subscribe();
   }
 
   ngOnDestroy(): void {
