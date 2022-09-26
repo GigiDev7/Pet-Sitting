@@ -8,12 +8,16 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   isJoinModalShown!: boolean;
+  isJoinFormShown!: boolean;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.isJoinModalShown.subscribe({
       next: (val) => (this.isJoinModalShown = val),
+    });
+    this.authService.isJoinFormShown.subscribe({
+      next: (val) => (this.isJoinFormShown = val),
     });
   }
 }

@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   public isJoinModalShown = new BehaviorSubject<boolean>(false);
+  public isJoinFormShown = new BehaviorSubject<boolean>(true);
 
   public closeJoinModal() {
     this.isJoinModalShown.next(false);
@@ -13,5 +14,13 @@ export class AuthService {
 
   public openJoinModal() {
     this.isJoinModalShown.next(true);
+  }
+
+  public openJoinForm() {
+    this.isJoinFormShown.next(true);
+  }
+
+  public closeJoinForm() {
+    this.isJoinFormShown.next(false);
   }
 }
