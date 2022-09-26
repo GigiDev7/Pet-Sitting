@@ -16,7 +16,8 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
     dateOfBirth: new FormControl('', [Validators.required]),
-    location: new FormControl('', [Validators.required]),
+    country: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,

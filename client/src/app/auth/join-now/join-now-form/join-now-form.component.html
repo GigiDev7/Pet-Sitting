@@ -86,25 +86,50 @@
         >
       </div>
       <div class="flex flex-col gap-3">
-        <label class="font-medium">Location</label>
+        <label class="font-medium">Country</label>
         <input
           [ngClass]="{
             'border-red-600':
-              !registerForm.get('location')?.valid &&
-              registerForm.get('location')?.touched
+              !registerForm.get('country')?.valid &&
+              registerForm.get('country')?.touched
           }"
-          formControlName="location"
+          formControlName="country"
+          class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
+          type="text"
+        />
+        <div class="w-full bg-gray-200 rounded-md py-4 pl-4">
+          <app-location-typeahead></app-location-typeahead>
+        </div>
+        <span
+          *ngIf="
+            !registerForm.get('country')?.valid &&
+            registerForm.get('country')?.touched
+          "
+          class="flex items-center text-red-600 gap-2 text-sm"
+          ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
+          country</span
+        >
+      </div>
+      <div class="flex flex-col gap-3">
+        <label class="font-medium">City</label>
+        <input
+          [ngClass]="{
+            'border-red-600':
+              !registerForm.get('city')?.valid &&
+              registerForm.get('city')?.touched
+          }"
+          formControlName="city"
           class="border-[1px] py-2 border-black pl-3 rounded-md outline-0"
           type="text"
         />
         <span
           *ngIf="
-            !registerForm.get('location')?.valid &&
-            registerForm.get('location')?.touched
+            !registerForm.get('city')?.valid &&
+            registerForm.get('city')?.touched
           "
           class="flex items-center text-red-600 gap-2 text-sm"
           ><mat-icon class="text-md">error_outline</mat-icon> Please enter your
-          location</span
+          city</span
         >
       </div>
       <div class="flex flex-col gap-3">
