@@ -11,6 +11,12 @@ export class JoinNowModalComponent implements OnInit {
     this.authService.closeJoinModal();
   }
 
+  onChooseMemberClick(type: string) {
+    this.authService.closeJoinModal();
+    this.authService.openJoinForm();
+    this.authService.memberType = type;
+  }
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}

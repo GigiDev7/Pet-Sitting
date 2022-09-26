@@ -15,6 +15,7 @@
       For pet and home owners looking for care while away
     </p>
     <button
+      (click)="onChooseMemberClick('owner')"
       class="mt-12 text-white flex items-center border-[2px] border-white w-[90%] py-4 rounded-md pl-3 text-2xl font-medium hover:bg-pink-800"
     >
       Choose owner membership <mat-icon>keyboard_arrow_right</mat-icon>
@@ -27,6 +28,7 @@
       For sitters looking for homes and pets to care for
     </p>
     <button
+      (click)="onChooseMemberClick('sitter')"
       class="mt-12 text-pink-700 flex items-center border-[2px] border-pink-700 w-[90%] py-4 rounded-md pl-3 text-2xl font-medium hover:bg-gray-200"
     >
       Choose sitter membership <mat-icon>keyboard_arrow_right</mat-icon>
