@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ICountry } from '../country.service';
 
 @Component({
@@ -8,6 +8,11 @@ import { ICountry } from '../country.service';
 })
 export class LocationTypeaheadComponent implements OnInit {
   @Input() countries!: ICountry[];
+  @Output() countrySelected = new EventEmitter<string>();
+
+  onCountryClick(country: string) {
+    this.countrySelected.emit(country);
+  }
 
   constructor() {}
 

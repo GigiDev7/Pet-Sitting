@@ -103,6 +103,7 @@
           class="w-full bg-gray-200 rounded-md py-4 pl-4"
         >
           <app-location-typeahead
+            (countrySelected)="selectCountry($event)"
             [countries]="countries"
           ></app-location-typeahead>
         </div>

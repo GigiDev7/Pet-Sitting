@@ -1,6 +1,7 @@
 <div class="max-h-44 overflow-y-scroll">
   <ul class="flex flex-col gap-4">
     <li
+      (click)="onCountryClick(country.country)"
       *ngFor="let country of countries"
       class="cursor-pointer hover:font-semibold"
     >

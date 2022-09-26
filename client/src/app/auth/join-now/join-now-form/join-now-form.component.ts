@@ -50,6 +50,13 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     );
   }
 
+  selectCountry(eventData: string) {
+    this.registerForm.patchValue({
+      country: eventData,
+    });
+    this.countries = [];
+  }
+
   onRegisterFormSubmit() {
     const {
       firstname,
