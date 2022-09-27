@@ -250,6 +250,12 @@
         >
       </div>
 
+      <span
+        *ngIf="registerError"
+        class="flex items-center text-red-600 gap-2 text-center text-md font-medium"
+        >{{ registerError }}</span
+      >
+
       <button
         class="mt-8 text-white bg-pink-700 py-3 rounded-3xl hover:bg-pink-600"
         type="submit"

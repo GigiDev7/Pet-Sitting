@@ -14,6 +14,7 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
   public passwordsMatchError: boolean = false;
   public countries: ICountry[] = [];
   public registerSuccess: boolean = false;
+  public registerError: string = '';
 
   public registerForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -97,6 +98,7 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
       })
       .subscribe({
         next: () => (this.registerSuccess = true),
+        error: (err) => (this.registerError = err.error.message),
       });
   }
 
