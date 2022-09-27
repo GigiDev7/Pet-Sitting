@@ -13,6 +13,7 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
   public maxDateRestriction!: string;
   public passwordsMatchError: boolean = false;
   public countries: ICountry[] = [];
+  public registerSuccess: boolean = false;
 
   public registerForm: FormGroup = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -57,16 +58,25 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     this.countries = [];
   }
 
+  onSuccessRegisterClick() {
+    this.registerSuccess = false;
+    this.authService.closeJoinForm();
+    this.router.navigate(['login']);
+  }
+
   onRegisterFormSubmit() {
     const {
       firstname,
       lastname,
       dateOfBirth,
-      location,
+      city,
+      country,
       email,
       password,
       confirmPassword,
     } = this.registerForm.value;
+
+    if (!this.registerForm.valid) return;
 
     if (password !== confirmPassword) {
       this.passwordsMatchError = true;
@@ -74,7 +84,20 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
     }
 
     this.passwordsMatchError = false;
-    console.log(this.registerForm.value);
+    this.authService
+      .register({
+        email,
+        password,
+        city,
+        country,
+        firstname,
+        lastname,
+        dateOfBirth,
+        memberType: this.authService.memberType,
+      })
+      .subscribe({
+        next: () => (this.registerSuccess = true),
+      });
   }
 
   constructor(

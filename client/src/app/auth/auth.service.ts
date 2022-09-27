@@ -1,13 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { BASE_URL } from '../config/config';
+
+interface IRegisterData {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  dateOfBirth: string;
+  country: string;
+  city: string;
+  memberType: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   public isJoinModalShown = new BehaviorSubject<boolean>(false);
-  public isJoinFormShown = new BehaviorSubject<boolean>(true);
+  public isJoinFormShown = new BehaviorSubject<boolean>(false);
   public memberType!: string;
+
+  constructor(private http: HttpClient) {}
 
   public closeJoinModal() {
     this.isJoinModalShown.next(false);
@@ -23,5 +38,9 @@ export class AuthService {
 
   public closeJoinForm() {
     this.isJoinFormShown.next(false);
+  }
+
+  public register(formData: IRegisterData) {
+    return this.http.post(`${BASE_URL}/user/register`, formData);
   }
 }

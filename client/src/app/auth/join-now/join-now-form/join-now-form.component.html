@@ -3,6 +3,35 @@
 ></div>
 
 <div
+  *ngIf="registerSuccess"
+  class="bg-white h-fit flex flex-col items-center justify-center gap-8 pb-16 w-[35%] rounded-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+>
+  <h1 class="text-teal-700 font-medium text-2xl mt-7">
+    Successfully registered!
+  </h1>
+
+  <p class="text-gray-500 text-center text-md w-[70%]">
+    By creating an account, you are agreeing to our
+    <a
+      target="_blank"
+      routerLink="privacy-policy"
+      class="text-teal-700 cursor-pointer font-medium"
+      >privacy policy</a
+    >
+    and to receive discounts on your membership and more about how it works by
+    email. You can unsubscribe at any time.
+  </p>
+
+  <button
+    (click)="onSuccessRegisterClick()"
+    class="text-white bg-pink-700 hover:bg-pink-600 px-8 py-2 rounded-3xl"
+  >
+    Login to your account
+  </button>
+</div>
+
+<div
+  *ngIf="!registerSuccess"
   class="bg-white h-screen overflow-y-scroll flex pb-16 w-[45%] rounded-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 >
   <mat-icon
