@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
   public isProfileBoxOpen: boolean = false;
   public isLoggedIn: boolean = false;
 
@@ -18,10 +20,26 @@ export class HeaderComponent implements OnInit {
     this.isProfileBoxOpen = !this.isProfileBoxOpen;
   }
 
+  onLogoutClick() {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    this.authService
+      .logout(user.accessToken, user.refreshToken)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          localStorage.removeItem('user');
+          this.isProfileBoxOpen = false;
+          this.isLoggedIn = false;
+        },
+      });
+  }
+
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
     const user = localStorage.getItem('user');
     if (user) this.isLoggedIn = true;
   }
+
+  ngOnInit(): void {}
 }

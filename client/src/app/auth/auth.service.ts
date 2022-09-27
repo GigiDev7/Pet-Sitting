@@ -43,4 +43,24 @@ export class AuthService {
   public register(formData: IRegisterData) {
     return this.http.post(`${BASE_URL}/user/register`, formData);
   }
+
+  public login(email: string, password: string) {
+    return this.http.post(`${BASE_URL}/user/login`, { email, password }).pipe(
+      tap((res) => {
+        localStorage.setItem('user', JSON.stringify(res));
+      })
+    );
+  }
+
+  public logout(accessToken: string, refreshToken: string) {
+    return this.http.post(
+      `${BASE_URL}/user/logout`,
+      { refreshToken },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  }
 }

@@ -3,7 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { CountryService, ICountry } from '../../country.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-join-now-form',
   templateUrl: './join-now-form.component.html',
@@ -96,6 +98,7 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
         dateOfBirth,
         memberType: this.authService.memberType,
       })
+      .pipe(untilDestroyed(this))
       .subscribe({
         next: () => (this.registerSuccess = true),
         error: (err) => (this.registerError = err.error.message),
