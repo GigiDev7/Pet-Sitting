@@ -1,5 +1,5 @@
 <header
-  class="flex justify-between px-10 py-4 border-y-[1px] sticky top-0 z-10 bg-white"
+  class="flex justify-between px-10 h-20 border-y-[1px] sticky top-0 z-10 bg-white"
 >
   <div class="flex gap-x-6 items-center">
     <a
@@ -15,14 +15,45 @@
       How it works
     </button>
     <button routerLink="help" class="hover:text-gray-600">Help</button>
-    <button routerLink="login" class="text-fuchsia-700 hover:text-fuchsia-600">
+    <button
+      *ngIf="!isLoggedIn"
+      routerLink="login"
+      class="text-fuchsia-700 hover:text-fuchsia-600"
+    >
       Log in
     </button>
     <button
+      *ngIf="!isLoggedIn"
       (click)="onJoinNowClick()"
       class="bg-fuchsia-700 text-white px-5 py-2 rounded-3xl hover:bg-fuchsia-600"
     >
       Join Now
     </button>
+    <div
+      *ngIf="isLoggedIn"
+      (click)="toggleProfileBox()"
+      class="relative h-full px-2 flex gap-1 items-center text-gray-600 cursor-pointer hover:bg-gray-100"
+    >
+      <mat-icon> person_pin</mat-icon>
+      <p>Gigi</p>
+      <mat-icon *ngIf="!isProfileBoxOpen">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="isProfileBoxOpen">keyboard_arrow_up</mat-icon>
+    </div>
+    <div
+      *ngIf="isProfileBoxOpen"
+      class="absolute flex flex-col gap-3 items-start p-4 bg-white shadow-2xl top-[120%] right-10 border-[1px] z-50 h-60 w-56"
+    >
+      <button class="hover:bg-gray-100 w-full text-start py-2 pl-2">
+        Help
+      </button>
+      <button class="hover:bg-gray-100 w-full text-start py-2 pl-2">
+        Settings
+      </button>
+      <button
+        class="hover:bg-gray-100 w-full text-start py-2 pl-2 border-t-[1px] mt-8"
+      >
+        Log out
+      </button>
+    </div>
   </div>
 </header>
