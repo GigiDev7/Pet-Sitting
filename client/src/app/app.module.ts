@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -24,6 +24,9 @@ import { JoinNowModalComponent } from './auth/join-now/join-now-modal/join-now-m
 import { JoinNowFormComponent } from './auth/join-now/join-now-form/join-now-form.component';
 import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 import { LocationTypeaheadComponent } from './auth/location-typeahead/location-typeahead.component';
+
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,8 +56,22 @@ import { LocationTypeaheadComponent } from './auth/location-typeahead/location-t
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          const user = JSON.parse(localStorage.getItem('user')!);
+          return user.accessToken;
+        },
+      },
+    }),
   ],
-  providers: [],
+  providers: [
+    /*  {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }, */
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

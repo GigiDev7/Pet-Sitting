@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -30,11 +31,12 @@ export class HeaderComponent implements OnInit, DoCheck {
           localStorage.removeItem('user');
           this.isProfileBoxOpen = false;
           this.isLoggedIn = false;
+          this.router.navigate(['']);
         },
       });
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngDoCheck(): void {
     const user = localStorage.getItem('user');
