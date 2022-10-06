@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
+import { BASE_URL } from '../config/config';
 
 @Component({
   selector: 'app-profile-page',
@@ -28,8 +29,8 @@ export class ProfilePageComponent implements OnInit {
     const formData = new FormData();
     formData.append('profileImage', file);
     this.authService.uploadImage(formData).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: (res: any) => {
+        localStorage.setItem('user', JSON.stringify(res));
       },
     });
   }
@@ -40,5 +41,11 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const user = JSON.parse(localStorage.getItem('user')!);
+
+    if (user && user.profileImage) {
+      this.filePath = `${BASE_URL}/${user.profileImage}`;
+    }
+  }
 }
