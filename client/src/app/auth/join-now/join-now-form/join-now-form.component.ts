@@ -126,7 +126,11 @@ export class JoinNowFormComponent implements OnInit, OnDestroy {
       maxDate.getMonth().toString().length === 1
         ? '0' + maxDate.getMonth()
         : maxDate.getMonth()
-    }-${maxDate.getDate()}`;
+    }-${
+      maxDate.getDate().toString().length === 1
+        ? '0' + maxDate.getDate()
+        : maxDate.getDate()
+    }`;
 
     this.countryService.getCountries().subscribe();
   }

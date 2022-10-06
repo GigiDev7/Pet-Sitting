@@ -8,7 +8,7 @@ const countryRouter = require("./routes/countryRoutes");
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: true }));
+app.use(cors());
 app.use("/UserImages", express.static("UserImages"));
 
 app.use("/user", userRouter);

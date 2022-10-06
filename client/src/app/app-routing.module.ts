@@ -8,6 +8,7 @@ import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.component';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyPageComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
   },
 ];
 

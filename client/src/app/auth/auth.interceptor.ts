@@ -20,7 +20,13 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let user = JSON.parse(localStorage.getItem('user')!);
-    const refresh = () =>
+    if (user) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${user.accessToken}`),
+      });
+      return next.handle(cloned);
+    }
+    /* const refresh = () =>
       this.http.post(`${BASE_URL}/user/refreshToken`, {
         refreshToken: user.refreshToken,
       });
@@ -53,7 +59,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(cloned);
       }
     }
-
+ */
     return next.handle(req);
   }
 }

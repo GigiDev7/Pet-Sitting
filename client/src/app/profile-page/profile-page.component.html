@@ -1,0 +1,48 @@
+<div>
+  <div class="relative w-1/2">
+    <img
+      *ngIf="filePath"
+      class="w-44 h-44 rounded-[50%]"
+      alt="image"
+      [src]="filePath"
+    />
+
+    <div
+      *ngIf="!filePath"
+      class="w-44 h-44 rounded-[50%] relative bg-gray-200 flex justify-end items-end"
+    >
+      <p
+        class="self-center text-xl text-center absolute left-1/2 -translate-x-1/2"
+      >
+        No photo
+      </p>
+    </div>
+
+    <form
+      (ngSubmit)="handleImageUpload()"
+      class="absolute bottom-0 right-[58%] flex"
+      [formGroup]="imageForm"
+    >
+      <div>
+        <label for="upload-photo"
+          ><mat-icon class="cursor-pointer">add_a_photo</mat-icon></label
+        >
+        <input
+          #imageInput
+          formControlName="img"
+          accept="image/*"
+          (change)="handleChange($event)"
+          id="upload-photo"
+          type="file"
+          class="opacity-0 -z-10 absolute"
+        />
+      </div>
+      <button
+        class="ml-3 border-[1px] px-5 rounded-md font-medium hover:bg-gray-200 py-1"
+        type="submit"
+      >
+        Upload
+      </button>
+    </form>
+  </div>
+</div>

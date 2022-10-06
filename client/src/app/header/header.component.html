@@ -35,7 +35,7 @@
       class="relative h-full px-2 flex gap-1 items-center text-gray-600 cursor-pointer hover:bg-gray-100"
     >
       <mat-icon> person_pin</mat-icon>
-      <p>Gigi</p>
+      <p>{{ firstname | titlecase }}</p>
       <mat-icon *ngIf="!isProfileBoxOpen">keyboard_arrow_down</mat-icon>
       <mat-icon *ngIf="isProfileBoxOpen">keyboard_arrow_up</mat-icon>
     </div>
@@ -43,7 +43,10 @@
       *ngIf="isProfileBoxOpen"
       class="absolute flex flex-col gap-3 items-start p-4 bg-white shadow-2xl top-[120%] right-10 border-[1px] z-50 h-fit w-56"
     >
-      <button class="hover:bg-gray-100 w-full text-start py-2 pl-2">
+      <button
+        routerLink="profile"
+        class="hover:bg-gray-100 w-full text-start py-2 pl-2"
+      >
         Profile
       </button>
       <button class="hover:bg-gray-100 w-full text-start py-2 pl-2">

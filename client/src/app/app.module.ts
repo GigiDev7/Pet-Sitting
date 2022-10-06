@@ -27,6 +27,7 @@ import { LocationTypeaheadComponent } from './auth/location-typeahead/location-t
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     JoinNowFormComponent,
     PrivacyPolicyPageComponent,
     LocationTypeaheadComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,11 +68,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     }),
   ],
   providers: [
-    /*  {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }, */
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, DoCheck {
   public isProfileBoxOpen: boolean = false;
   public isLoggedIn: boolean = false;
+  public firstname: string = '';
 
   onJoinNowClick() {
     this.authService.openJoinModal();
@@ -40,8 +41,17 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     const user = localStorage.getItem('user');
-    if (user) this.isLoggedIn = true;
+    if (user) {
+      this.isLoggedIn = true;
+      this.firstname = JSON.parse(user).firstname;
+    }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe({
+      next: () => {
+        this.isProfileBoxOpen = false;
+      },
+    });
+  }
 }
