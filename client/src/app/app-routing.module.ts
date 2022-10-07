@@ -11,6 +11,7 @@ import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RestrictSigninGuard } from './auth/restrict-signin.guard';
+import { FindSitterPageComponent } from './find-sitter-page/find-sitter-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -44,6 +45,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfilePageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'find-sitter',
+    component: FindSitterPageComponent,
   },
 ];
 

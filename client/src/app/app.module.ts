@@ -29,6 +29,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { NotificationComponent } from './notification/notification.component';
+import { FindSitterPageComponent } from './find-sitter-page/find-sitter-page.component';
+
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { NotificationComponent } from './notification/notification.component';
     LocationTypeaheadComponent,
     ProfilePageComponent,
     NotificationComponent,
+    FindSitterPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,7 @@ import { NotificationComponent } from './notification/notification.component';
     MatIconModule,
     FormsModule,
     CommonModule,
+    MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({

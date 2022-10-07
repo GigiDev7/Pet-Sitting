@@ -11,3 +11,20 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-step-icon {
+  background-color: rgb(107, 114, 128) !important;
+  height: 35px !important;
+  width: 35px !important;
+}
+
+.mat-step-icon-selected {
+  background-color: rgb(13, 148, 156) !important;
+  height: 35px !important;
+  width: 35px !important;
+}
+
+.mat-stepper-horizontal-line {
+  background-color: rgb(13, 148, 156) !important;
+  height: 5px !important;
+}
