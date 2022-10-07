@@ -6,6 +6,7 @@ const {
   refreshToken,
   logout,
   controlHelpMessages,
+  updateUser,
 } = require("../controllers/userControllers");
 const {
   loginValidation,
@@ -52,5 +53,7 @@ router
 router
   .route("/help-message")
   .post(messageValidator, validationHandler, controlHelpMessages);
+
+router.route("/edit").patch(protectAuth, updateUser);
 
 module.exports = router;

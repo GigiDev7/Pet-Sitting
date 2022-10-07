@@ -20,11 +20,13 @@ export class ProfilePageComponent implements OnInit {
   @ViewChild('imageInput') imageInput!: ElementRef;
   isImageUpdating: boolean = false;
   countries: ICountry[] = [];
+  passwordConfirmError: string = '';
 
   public profileForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email]),
     firstname: new FormControl(''),
     lastname: new FormControl(''),
+    dateOfBirth: new FormControl(''),
     country: new FormControl(''),
     city: new FormControl(''),
     memberType: new FormControl(''),
@@ -70,7 +72,60 @@ export class ProfilePageComponent implements OnInit {
   }
 
   handleSubmit() {
-    console.log(this.profileForm.dirty);
+    const { newPassword, confirmPassword } = this.profileForm.value;
+
+    if (newPassword && newPassword !== confirmPassword) {
+      this.passwordConfirmError = 'Passwords do not match';
+      return;
+    }
+
+    if (newPassword && newPassword.length < 6) {
+      this.passwordConfirmError = 'Password must be at least 6 characters';
+      return;
+    }
+
+    const userData: any = {};
+    const allFields = [
+      'email',
+      'firstname',
+      'lastname',
+      'dateOfBirth',
+      'country',
+      'city',
+      'memberType',
+      'newPassword',
+    ];
+
+    allFields.forEach((field) => {
+      if (this.profileForm.get(field)?.touched) {
+        if (field === 'newPassword') {
+          userData['password'] = this.profileForm.get(field)?.value;
+        } else {
+          userData[field] = this.profileForm.get(field)?.value;
+        }
+      }
+    });
+
+    this.authService.updateUser(userData).subscribe({
+      next: (res: any) => {
+        const user = JSON.parse(localStorage.getItem('user')!);
+        const newUser = {
+          ...res,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+        };
+        localStorage.setItem('user', JSON.stringify(newUser));
+        this.profileForm.patchValue({
+          email: res.email,
+          country: res.country,
+          city: res.city,
+          firstname: res.firstname,
+          lastname: res.lastname,
+          memberType: res.memberType,
+          dateOfBirth: res.dateOfBirth.split('T')[0],
+        });
+      },
+    });
   }
 
   constructor(
@@ -86,7 +141,15 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('user')!);
 
-    const { email, firstname, lastname, country, city, memberType } = user;
+    const {
+      email,
+      firstname,
+      lastname,
+      country,
+      city,
+      memberType,
+      dateOfBirth,
+    } = user;
 
     if (user.profileImage) {
       this.filePath = `${BASE_URL}/${user.profileImage}`;
@@ -100,6 +163,7 @@ export class ProfilePageComponent implements OnInit {
       firstname,
       lastname,
       memberType,
+      dateOfBirth: dateOfBirth.split('T')[0],
     });
 
     this.countryService.getCountries().subscribe();

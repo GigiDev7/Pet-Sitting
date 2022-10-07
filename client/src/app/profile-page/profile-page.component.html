@@ -77,6 +77,14 @@
           class="border-[2px] border-black py-2 pl-1 w-[70%]"
         />
       </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Birth date</label>
+        <input
+          type="date"
+          formControlName="dateOfBirth"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
       <div class="flex flex-col gap-3">
         <div class="flex items-center">
           <label class="font-medium w-[100px]">Country</label>
@@ -115,13 +123,20 @@
           <option value="sitter">Sitter</option>
         </select>
       </div>
-      <div class="flex items-center">
-        <label class="font-medium w-[100px]">New password</label>
-        <input
-          formControlName="newPassword"
-          type="password"
-          class="border-[2px] border-black py-2 pl-1 w-[70%]"
-        />
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center">
+          <label class="font-medium w-[100px]">New password</label>
+          <input
+            formControlName="newPassword"
+            type="password"
+            class="border-[2px] border-black py-2 pl-1 w-[70%]"
+          />
+        </div>
+        <span
+          class="text-red-600 w-[70%] text-start self-end mx-auto"
+          *ngIf="passwordConfirmError"
+          >{{ passwordConfirmError }}</span
+        >
       </div>
       <div class="flex items-center">
         <label class="font-medium w-[100px]">Confirm password</label>

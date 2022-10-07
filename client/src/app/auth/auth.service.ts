@@ -67,4 +67,8 @@ export class AuthService {
   public uploadImage(file: any) {
     return this.http.patch(`${BASE_URL}/user/uploadImage`, file);
   }
+
+  public updateUser(userData: any) {
+    return this.http.patch(`${BASE_URL}/user/edit`, userData);
+  }
 }

@@ -51,12 +51,12 @@ const refresh = async (refreshToken) => {
   let newRefreshToken;
 
   if (!refreshToken) {
-    throw new CustomError("Authentication Error", "Authentication Error");
+    throw new CustomError("Authentication Error", "Authentication Failed!");
   }
 
   const existingRefreshToken = await RefreshToken.findOne({ refreshToken });
   if (!existingRefreshToken) {
-    throw new CustomError("Authentication Error", "Authentication Error");
+    throw new CustomError("Authentication Error", "Authentication Failed!");
   }
 
   await jwt.verify(
@@ -64,7 +64,7 @@ const refresh = async (refreshToken) => {
     process.env.JWT_SECRET_REFRESH,
     async (err, decodedData) => {
       if (err) {
-        throw new CustomError("Authentication Error", "Authentication Error");
+        throw new CustomError("Authentication Error", "Authentication Failed!");
       }
 
       await RefreshToken.findByIdAndDelete(existingRefreshToken._id);
@@ -95,6 +95,14 @@ const sendMessage = async (messageData) => {
   });
 };
 
+const editUser = async (userData, userId) => {
+  if (userData.password) {
+    const salt = await bcrypt.genSalt(12);
+    userData.password = await bcrypt.hash(userData.password, salt);
+  }
+  return User.findByIdAndUpdate(userId, userData, { new: true });
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -102,4 +110,5 @@ module.exports = {
   refresh,
   logoutUser,
   sendMessage,
+  editUser,
 };

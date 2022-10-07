@@ -6,6 +6,7 @@ const {
   refresh,
   logoutUser,
   sendMessage,
+  editUser,
 } = require("../services/userServices");
 
 const register = async (req, res, next) => {
@@ -71,6 +72,16 @@ const controlHelpMessages = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) => {
+  try {
+    const updatedUser = await editUser(req.body, req.user._id);
+    const { __v, password, ...user } = updatedUser._doc;
+    res.status(201).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -78,4 +89,5 @@ module.exports = {
   uploadProfileImage,
   logout,
   controlHelpMessages,
+  updateUser,
 };
