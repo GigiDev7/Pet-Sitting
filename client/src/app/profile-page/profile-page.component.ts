@@ -8,6 +8,7 @@ import {
 import { AuthService } from '../auth/auth.service';
 import { CountryService, ICountry } from '../auth/country.service';
 import { BASE_URL } from '../config/config';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -52,6 +53,9 @@ export class ProfilePageComponent implements OnInit {
     this.authService.uploadImage(formData).subscribe({
       next: (res: any) => {
         localStorage.setItem('user', JSON.stringify(res));
+        this.notificationService.showNotification(
+          'Image uploaded successfully'
+        );
       },
     });
   }
@@ -124,6 +128,9 @@ export class ProfilePageComponent implements OnInit {
           memberType: res.memberType,
           dateOfBirth: res.dateOfBirth.split('T')[0],
         });
+        this.notificationService.showNotification(
+          'Profile updated successfully'
+        );
       },
     });
   }
@@ -131,7 +138,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private authService: AuthService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private notificationService: NotificationService
   ) {
     this.imageForm = this.fb.group({
       img: [null],

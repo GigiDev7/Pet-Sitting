@@ -1,4 +1,8 @@
 <main class="w-[90%] mx-auto pb-1">
+  <app-notification
+    [text]="notificationText"
+    *ngIf="notificationText"
+  ></app-notification>
   <app-join-now-modal *ngIf="isJoinModalShown"></app-join-now-modal>
   <app-join-now-form *ngIf="isJoinFormShown"></app-join-now-form>
   <app-header></app-header>
