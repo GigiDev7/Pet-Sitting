@@ -10,6 +10,7 @@ import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RestrictSigninGuard } from './auth/restrict-signin.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
+    canActivate: [RestrictSigninGuard],
   },
   {
     path: 'privacy-policy',
