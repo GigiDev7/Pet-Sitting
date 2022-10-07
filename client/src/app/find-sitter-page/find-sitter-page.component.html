@@ -47,12 +47,34 @@
 
         <div class="flex flex-col mt-24 gap-4">
           <label class="font-medium">Pets needing care</label>
-          <input
-            class="border-[1px] border-gray-300 rounded-md py-2 pl-1"
-            type="text"
-            placeholder="Your location"
-            formControlName="pets"
-          />
+
+          <div class="flex gap-8 flex-wrap">
+            <div
+              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+            >
+              <span> <i class="fas fa-dog"></i> Dogs</span>
+            </div>
+            <div
+              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+            >
+              <span> <i class="fas fa-cat"></i> Cats</span>
+            </div>
+            <div
+              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+            >
+              <span> <i class="fas fa-crow"></i> Birds</span>
+            </div>
+            <div
+              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+            >
+              <span> <i class="fas fa-fish"></i> Fish</span>
+            </div>
+            <div
+              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+            >
+              <span> <i class="fas fa-horse"></i> Horse</span>
+            </div>
+          </div>
         </div>
         <button
           class="bg-teal-600 hover:bg-teal-700 text-white w-full rounded-md mt-12 py-2 disabled:bg-teal-500"
