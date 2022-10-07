@@ -49,31 +49,11 @@
           <label class="font-medium">Pets needing care</label>
 
           <div class="flex gap-8 flex-wrap">
-            <div
-              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
-            >
-              <span> <i class="fas fa-dog"></i> Dogs</span>
-            </div>
-            <div
-              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
-            >
-              <span> <i class="fas fa-cat"></i> Cats</span>
-            </div>
-            <div
-              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
-            >
-              <span> <i class="fas fa-crow"></i> Birds</span>
-            </div>
-            <div
-              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
-            >
-              <span> <i class="fas fa-fish"></i> Fish</span>
-            </div>
-            <div
-              class="w-40 pl-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
-            >
-              <span> <i class="fas fa-horse"></i> Horse</span>
-            </div>
+            <app-pet-box iconClass="fas fa-dog" pet="Dogs"></app-pet-box>
+            <app-pet-box iconClass="fas fa-cat" pet="Cats"></app-pet-box>
+            <app-pet-box iconClass="fas fa-crow" pet="Birds"></app-pet-box>
+            <app-pet-box iconClass="fas fa-fish" pet="Fish"></app-pet-box>
+            <app-pet-box iconClass="fas fa-horses" pet="Horses"></app-pet-box>
           </div>
         </div>
         <button

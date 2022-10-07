@@ -32,6 +32,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { FindSitterPageComponent } from './find-sitter-page/find-sitter-page.component';
 
 import { MatStepperModule } from '@angular/material/stepper';
+import { PetBoxComponent } from './find-sitter-page/pet-box/pet-box.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     ProfilePageComponent,
     NotificationComponent,
     FindSitterPageComponent,
+    PetBoxComponent,
   ],
   imports: [
     BrowserModule,
