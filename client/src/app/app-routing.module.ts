@@ -9,6 +9,7 @@ import { HowItWorksPageComponent } from './how-it-works-page/how-it-works-page.c
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
