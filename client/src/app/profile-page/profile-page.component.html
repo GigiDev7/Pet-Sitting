@@ -1,4 +1,4 @@
-<div>
+<div class="mt-16 flex">
   <div class="relative w-1/2">
     <img
       *ngIf="filePath"
@@ -20,7 +20,7 @@
 
     <form
       (ngSubmit)="handleImageUpload()"
-      class="absolute bottom-0 right-[58%] flex"
+      class="absolute top-[30%] right-[58%] flex"
       [formGroup]="imageForm"
     >
       <div>
@@ -38,10 +38,93 @@
         />
       </div>
       <button
-        class="ml-3 border-[1px] px-5 rounded-md font-medium hover:bg-gray-200 py-1"
+        [disabled]="!imageInput.files || !imageInput.files.length"
+        class="ml-3 border-[1px] px-5 rounded-md font-medium disabled:text-gray-500 disabled:bg-transparent hover:bg-gray-200 py-1"
         type="submit"
       >
-        Upload
+        {{ isImageUpdating ? "Update" : "Upload" }}
+      </button>
+    </form>
+  </div>
+
+  <div class="w-1/2">
+    <form
+      (ngSubmit)="handleSubmit()"
+      [formGroup]="profileForm"
+      class="flex flex-col gap-8"
+    >
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Email</label>
+        <input
+          formControlName="email"
+          type="text"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Firstname</label>
+        <input
+          formControlName="firstname"
+          type="text"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Lastname</label>
+        <input
+          type="text"
+          formControlName="lastname"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Country</label>
+        <input
+          type="text"
+          formControlName="country"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">City</label>
+        <input
+          type="text"
+          formControlName="city"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Member type</label>
+        <select
+          formControlName="memberType"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        >
+          <option value="owner">Owner</option>
+          <option value="sitter">Sitter</option>
+        </select>
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">New password</label>
+        <input
+          formControlName="newPassword"
+          type="password"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+      <div class="flex items-center">
+        <label class="font-medium w-[100px]">Confirm password</label>
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          class="border-[2px] border-black py-2 pl-1 w-[70%]"
+        />
+      </div>
+
+      <button
+        [disabled]="!profileForm.dirty"
+        class="w-[70%] mx-auto text-white py-2 rounded-md disabled:bg-teal-600 bg-teal-600 hover:bg-teal-500"
+      >
+        Save changes
       </button>
     </form>
   </div>

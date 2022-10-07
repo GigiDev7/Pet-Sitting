@@ -1,5 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { BASE_URL } from '../config/config';
 
@@ -12,6 +17,18 @@ export class ProfilePageComponent implements OnInit {
   filePath!: string;
   imageForm!: FormGroup;
   @ViewChild('imageInput') imageInput!: ElementRef;
+  isImageUpdating: boolean = false;
+
+  public profileForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.email]),
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    country: new FormControl(''),
+    city: new FormControl(''),
+    memberType: new FormControl(''),
+    newPassword: new FormControl(''),
+    confirmPassword: new FormControl(''),
+  });
 
   handleChange(e: Event) {
     const file = (e.target as HTMLInputElement).files![0];
@@ -35,6 +52,10 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  handleSubmit() {
+    console.log(this.profileForm.dirty);
+  }
+
   constructor(public fb: FormBuilder, private authService: AuthService) {
     this.imageForm = this.fb.group({
       img: [null],
@@ -44,8 +65,20 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('user')!);
 
-    if (user && user.profileImage) {
+    const { email, firstname, lastname, country, city, memberType } = user;
+
+    if (user.profileImage) {
       this.filePath = `${BASE_URL}/${user.profileImage}`;
+      this.isImageUpdating = true;
     }
+
+    this.profileForm.patchValue({
+      email,
+      country,
+      city,
+      firstname,
+      lastname,
+      memberType,
+    });
   }
 }
