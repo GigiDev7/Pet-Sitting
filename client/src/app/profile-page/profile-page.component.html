@@ -1,5 +1,5 @@
 <div class="mt-16 flex">
-  <div class="relative w-1/2">
+  <div class="relative w-1/2 h-[100vh]">
     <img
       *ngIf="filePath"
       class="w-44 h-44 rounded-[50%]"
@@ -20,7 +20,7 @@
 
     <form
       (ngSubmit)="handleImageUpload()"
-      class="absolute top-[30%] right-[58%] flex"
+      class="absolute top-[25%] right-[58%] flex"
       [formGroup]="imageForm"
     >
       <div>
@@ -77,13 +77,25 @@
           class="border-[2px] border-black py-2 pl-1 w-[70%]"
         />
       </div>
-      <div class="flex items-center">
-        <label class="font-medium w-[100px]">Country</label>
-        <input
-          type="text"
-          formControlName="country"
-          class="border-[2px] border-black py-2 pl-1 w-[70%]"
-        />
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center">
+          <label class="font-medium w-[100px]">Country</label>
+          <input
+            (input)="onCountryChange($event)"
+            type="text"
+            formControlName="country"
+            class="border-[2px] border-black py-2 pl-1 w-[70%]"
+          />
+        </div>
+        <div
+          *ngIf="countries.length"
+          class="w-[70%] bg-gray-200 rounded-md py-4 pl-4 mx-auto"
+        >
+          <app-location-typeahead
+            (countrySelected)="selectCountry($event)"
+            [countries]="countries"
+          ></app-location-typeahead>
+        </div>
       </div>
       <div class="flex items-center">
         <label class="font-medium w-[100px]">City</label>

@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
+import { CountryService, ICountry } from '../auth/country.service';
 import { BASE_URL } from '../config/config';
 
 @Component({
@@ -18,6 +19,7 @@ export class ProfilePageComponent implements OnInit {
   imageForm!: FormGroup;
   @ViewChild('imageInput') imageInput!: ElementRef;
   isImageUpdating: boolean = false;
+  countries: ICountry[] = [];
 
   public profileForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email]),
@@ -52,11 +54,30 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  onCountryChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+
+    this.countries = this.countryService.countries.filter((el) =>
+      el.country.toLowerCase().includes(target.value.toLowerCase())
+    );
+  }
+
+  selectCountry(event: string) {
+    this.profileForm.patchValue({
+      country: event,
+    });
+    this.countries = [];
+  }
+
   handleSubmit() {
     console.log(this.profileForm.dirty);
   }
 
-  constructor(public fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    public fb: FormBuilder,
+    private authService: AuthService,
+    private countryService: CountryService
+  ) {
     this.imageForm = this.fb.group({
       img: [null],
     });
@@ -80,5 +101,7 @@ export class ProfilePageComponent implements OnInit {
       lastname,
       memberType,
     });
+
+    this.countryService.getCountries().subscribe();
   }
 }
