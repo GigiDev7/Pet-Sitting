@@ -8,6 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PetBoxComponent implements OnInit {
   @Input() iconClass!: string;
   @Input() pet!: string;
+  @Input() pets!: string[];
+
+  activeClass: string = 'bg-teal-700';
 
   constructor() {}
 

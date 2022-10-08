@@ -1,6 +1,10 @@
 <div
-  class="flex justify-between items-center w-40 px-2 py-3 rounded-md border-[2px] cursor-pointer hover:bg-gray-100"
+  [ngClass]="{
+    'bg-teal-700 text-white hover:bg-teal-700': pets.includes(pet),
+    'hover:bg-gray-100': !pets.includes(pet)
+  }"
+  class="flex justify-between items-center w-40 px-2 py-3 rounded-md border-[2px] cursor-pointer"
 >
   <span> <i [class]="iconClass"></i> {{ pet }}</span>
-  <mat-icon>done</mat-icon>
+  <mat-icon *ngIf="pets.includes(pet)">done</mat-icon>
 </div>

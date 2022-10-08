@@ -7,13 +7,21 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./find-sitter-page.component.css'],
 })
 export class FindSitterPageComponent implements OnInit {
-  locationForm: FormGroup = new FormGroup({
+  public petVariants: string[] = ['Dogs', 'Cats', 'Birds', 'Fish', 'Horses'];
+
+  public locationForm: FormGroup = new FormGroup({
     location: new FormControl(''),
   });
 
-  petsForm: FormGroup = new FormGroup({
-    pets: new FormControl(''),
-  });
+  public pets: string[] = [];
+
+  onPetBoxClick(val: string) {
+    if (this.pets.includes(val)) {
+      this.pets = this.pets.filter((el) => el !== val);
+    } else {
+      this.pets.push(val);
+    }
+  }
 
   constructor() {}
 
