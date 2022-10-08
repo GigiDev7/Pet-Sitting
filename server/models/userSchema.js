@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const isEmail = require("validator/lib/isEmail");
+const { commentSchema } = require("./commentSchema");
+const { ratingSchema } = require("./ratingSchema");
 
 const userSchema = new mongoose.Schema(
   {
@@ -44,6 +46,18 @@ const userSchema = new mongoose.Schema(
     },
     profileImage: {
       type: String,
+    },
+    mobile: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
+    comments: {
+      type: [commentSchema],
+    },
+    ratings: {
+      type: [ratingSchema],
     },
   },
   {
