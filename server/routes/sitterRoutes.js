@@ -1,9 +1,15 @@
 const express = require("express");
-const { createComment } = require("../controllers/commentsControllers");
+const {
+  createComment,
+  patchComment,
+} = require("../controllers/commentsControllers");
 const { protectAuth } = require("../middlewares/protectAuth");
 
 const router = express.Router();
 
-router.route("/:sitterId/comment").post(protectAuth, createComment);
+router.use(protectAuth);
+
+router.route("/:sitterId/comment").post(createComment);
+router.route("/:commentId").patch(patchComment);
 
 module.exports = router;

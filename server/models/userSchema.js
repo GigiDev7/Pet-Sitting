@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     comments: {
-      type: [commentSchema],
+      type: [mongoose.Types.ObjectId],
     },
     ratings: {
       type: [ratingSchema],
