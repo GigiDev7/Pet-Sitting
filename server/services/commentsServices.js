@@ -2,6 +2,10 @@ const User = require("../models/userSchema");
 const Comment = require("../models/commentSchema");
 const CustomError = require("../utils/customError");
 
+const getCommentsBySitter = (sitterId) => {
+  return Comment.find({ sitterId });
+};
+
 const addComment = async (comment, userId, sitterId) => {
   const newComment = await Comment.create({ comment, userId, sitterId });
   const sitter = await User.findById(sitterId);
@@ -44,4 +48,5 @@ module.exports = {
   addComment,
   updateComment,
   deleteComment,
+  getCommentsBySitter,
 };

@@ -2,7 +2,18 @@ const {
   addComment,
   updateComment,
   deleteComment,
+  getCommentsBySitter,
 } = require("../services/commentsServices");
+
+const findComments = async (req, res, next) => {
+  try {
+    const { sitterId } = req.params;
+    const comments = await getCommentsBySitter(sitterId);
+    res.status(200).json(comments);
+  } catch (error) {
+    next(error);
+  }
+};
 
 const createComment = async (req, res, next) => {
   try {
@@ -40,4 +51,5 @@ module.exports = {
   createComment,
   patchComment,
   removeComment,
+  findComments,
 };
