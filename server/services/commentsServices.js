@@ -22,7 +22,26 @@ const updateComment = async (newComment, userId, commentId) => {
   return oldComment;
 };
 
+const deleteComment = async (commentId, userId, sitterId) => {
+  const comment = await Comment.findById(commentId);
+
+  if (!comment.userId.equals(userId)) {
+    throw new CustomError("Authentication Error", "Access denied");
+  }
+
+  await Comment.findByIdAndDelete(commentId);
+
+  const sitter = await User.findById(sitterId);
+
+  sitter.comments = sitter.comments.filter(
+    (comment) => !comment.equals(commentId)
+  );
+  await sitter.save();
+  return sitter;
+};
+
 module.exports = {
   addComment,
   updateComment,
+  deleteComment,
 };

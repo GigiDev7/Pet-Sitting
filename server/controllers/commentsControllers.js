@@ -1,4 +1,8 @@
-const { addComment, updateComment } = require("../services/commentsServices");
+const {
+  addComment,
+  updateComment,
+  deleteComment,
+} = require("../services/commentsServices");
 
 const createComment = async (req, res, next) => {
   try {
@@ -22,7 +26,18 @@ const patchComment = async (req, res, next) => {
   }
 };
 
+const removeComment = async (req, res, next) => {
+  try {
+    const { commentId, sitterId } = req.params;
+    const sitter = await deleteComment(commentId, req.user._id, sitterId);
+    res.status(201).json(sitter);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createComment,
   patchComment,
+  removeComment,
 };
