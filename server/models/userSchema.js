@@ -59,7 +59,10 @@ const userSchema = new mongoose.Schema(
     ratings: {
       type: [ratingSchema],
     },
-    avgRating: Number,
+    avgRating: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
