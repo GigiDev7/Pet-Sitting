@@ -1,4 +1,4 @@
-const { giveRating } = require("../services/ratingsServices");
+const { giveRating, editRating } = require("../services/ratingsServices");
 
 const addRating = async (req, res, next) => {
   try {
@@ -11,6 +11,18 @@ const addRating = async (req, res, next) => {
   }
 };
 
+const updateRating = async (req, res, next) => {
+  try {
+    const { sitterId } = req.params;
+    const { rating } = req.body;
+    const sitter = await editRating(rating, req.user._id, sitterId);
+    res.status(201).json(sitter);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addRating,
+  updateRating,
 };

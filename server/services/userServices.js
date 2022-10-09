@@ -19,7 +19,10 @@ const comparePassowrds = async (password, hashedPassword) => {
   return await bcrypt.compare(password, hashedPassword);
 };
 
-const registerUser = (userData) => {
+const registerUser = async (userData) => {
+  const salt = await bcrypt.genSalt(12);
+  userData.password = await bcrypt.hash(userData.password, salt);
+
   return User.create(userData);
 };
 

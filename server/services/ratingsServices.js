@@ -18,6 +18,24 @@ const giveRating = async (rating, userId, sitterId) => {
   return sitter;
 };
 
+const editRating = async (newRating, userId, sitterId) => {
+  const sitter = await User.findById(sitterId);
+  const oldRating = sitter.ratings.find((rating) =>
+    rating.userId.equals(userId)
+  );
+
+  const newAvg =
+    (sitter.avgRating * sitter.ratings.length - oldRating.rating + newRating) /
+    sitter.ratings.length;
+
+  oldRating.rating = newRating;
+  sitter.avgRating = newAvg;
+
+  await sitter.save();
+  return sitter;
+};
+
 module.exports = {
   giveRating,
+  editRating,
 };
