@@ -5,6 +5,9 @@ const searchSitters = (country, pets) => {
     {
       $match: { country, memberType: "sitter", pets: { $all: pets } },
     },
+    {
+      $unset: ["password", "__v"],
+    },
   ]);
 };
 

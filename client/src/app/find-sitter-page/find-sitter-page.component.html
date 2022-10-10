@@ -74,6 +74,7 @@
           </div>
         </div>
         <button
+          (click)="onSearchClick()"
           [disabled]="!pets.length"
           class="bg-teal-600 hover:bg-teal-700 text-white w-full rounded-md mt-12 py-2 disabled:bg-teal-500"
           matStepperNext

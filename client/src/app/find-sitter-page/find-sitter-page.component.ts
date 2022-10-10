@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CountryService, ICountry } from '../auth/country.service';
+import { SitterService } from '../sitter.services';
 
 @Component({
   selector: 'app-find-sitter-page',
@@ -40,7 +42,20 @@ export class FindSitterPageComponent implements OnInit {
     this.countries = [];
   }
 
-  constructor(private countryService: CountryService) {}
+  onSearchClick() {
+    const { location } = this.locationForm.value;
+    this.sitterService.getFilteredSitters(location, this.pets).subscribe({
+      next: () => {
+        this.router.navigate(['sitters']);
+      },
+    });
+  }
+
+  constructor(
+    private countryService: CountryService,
+    private sitterService: SitterService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.countryService.getCountries().subscribe();
