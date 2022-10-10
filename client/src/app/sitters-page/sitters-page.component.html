@@ -1,3 +1,73 @@
+<div
+  class="bg-gray-100 h-20 border-t-[1px] flex items-center justify-between px-4"
+>
+  <div class="h-full flex items-center relative">
+    <input
+      type="text"
+      placeholder="Search sitters by location"
+      class="border-[2px] w-96 h-[60%] pl-10 border-gray-600 rounded-sm outline-0"
+    />
+    <mat-icon class="absolute left-3">search</mat-icon>
+  </div>
+
+  <div class="mr-12 h-full flex items-center">
+    <div
+      class="bg-teal-600 rounded-sm h-[45%] text-white px-6 flex items-center hover:bg-teal-500 cursor-pointer relative"
+    >
+      <p (click)="toggleSelectedPetBox()">
+        My pets ({{ selectedPets.length }})
+      </p>
+
+      <div
+        *ngIf="isSelectedPetBoxShown"
+        class="absolute top-10 py-2 bg-gray-400 text-black rounded-sm pl-3 shadow-lg left-0 w-full"
+      >
+        <div class="flex gap-4">
+          <label class="w-[35%]" for="dogs">Dogs</label>
+          <input
+            class=""
+            [checked]="selectedPets.includes('Dogs')"
+            id="dogs"
+            type="checkbox"
+          />
+        </div>
+        <div class="flex gap-4">
+          <label class="w-[35%]" for="cats">Cats</label>
+          <input
+            class=""
+            [checked]="selectedPets.includes('Cats')"
+            id="cats"
+            type="checkbox"
+          />
+        </div>
+        <div class="flex gap-4">
+          <label class="w-[35%]" for="birds">Birds</label>
+          <input
+            [checked]="selectedPets.includes('Birds')"
+            id="birds"
+            type="checkbox"
+          />
+        </div>
+        <div class="flex gap-4">
+          <label class="w-[35%]" for="fish">Fish</label>
+          <input
+            [checked]="selectedPets.includes('Fish')"
+            id="fish"
+            type="checkbox"
+          />
+        </div>
+        <div class="flex gap-4">
+          <label class="w-[35%]" for="horses">Horses</label>
+          <input
+            [checked]="selectedPets.includes('Horses')"
+            id="horses"
+            type="checkbox"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="flex mt-24">
   <app-sitter-card
     [sitter]="sitter"

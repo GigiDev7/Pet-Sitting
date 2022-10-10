@@ -9,6 +9,12 @@ import { IUser, SitterService } from '../sitter.services';
 })
 export class SittersPageComponent implements OnInit {
   public sitters!: IUser[];
+  public selectedPets!: string[];
+  public isSelectedPetBoxShown: boolean = false;
+
+  toggleSelectedPetBox() {
+    this.isSelectedPetBoxShown = !this.isSelectedPetBoxShown;
+  }
 
   constructor(
     private sitterService: SitterService,
@@ -16,6 +22,7 @@ export class SittersPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.selectedPets = this.route.snapshot.queryParams['pets'].split(',');
     this.sitterService.sitters.subscribe({
       next: (val) => {
         this.sitters = val;
