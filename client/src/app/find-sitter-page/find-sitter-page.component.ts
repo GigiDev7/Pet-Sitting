@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CountryService, ICountry } from '../auth/country.service';
 
 @Component({
   selector: 'app-find-sitter-page',
@@ -14,6 +15,7 @@ export class FindSitterPageComponent implements OnInit {
   });
 
   public pets: string[] = [];
+  public countries: ICountry[] = [];
 
   onPetBoxClick(val: string) {
     if (this.pets.includes(val)) {
@@ -23,7 +25,24 @@ export class FindSitterPageComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  onLocationChange(e: Event) {
+    const target = e.target as HTMLInputElement;
 
-  ngOnInit(): void {}
+    this.countries = this.countryService.countries.filter((el) =>
+      el?.country?.toLowerCase().includes(target.value.toLowerCase())
+    );
+  }
+
+  onLocationClick(event: string) {
+    this.locationForm.patchValue({
+      location: event,
+    });
+    this.countries = [];
+  }
+
+  constructor(private countryService: CountryService) {}
+
+  ngOnInit(): void {
+    this.countryService.getCountries().subscribe();
+  }
 }
