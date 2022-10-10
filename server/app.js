@@ -6,6 +6,7 @@ const userRouter = require("./routes/userRoutes");
 const countryRouter = require("./routes/countryRoutes");
 const commentsRouter = require("./routes/commentsRoutes");
 const ratingsRouter = require("./routes/ratingsRoutes");
+const sitterRouter = require("./routes/sitterRoutes");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/user", userRouter);
 app.use("/countries", countryRouter);
 app.use("/comment", commentsRouter);
 app.use("/ratings", ratingsRouter);
+app.use("/sitters", sitterRouter);
 
 app.use(errorHandler);
 
