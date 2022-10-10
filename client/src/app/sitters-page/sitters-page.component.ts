@@ -9,6 +9,7 @@ import { IUser, SitterService } from '../sitter.services';
 })
 export class SittersPageComponent implements OnInit {
   public sitters!: IUser[];
+  public petVariants: string[] = ['Dogs', 'Cats', 'Birds', 'Fish', 'Horses'];
   public selectedPets!: string[];
   public isSelectedPetBoxShown: boolean = false;
 
