@@ -23,6 +23,38 @@ export class ProfilePageComponent implements OnInit {
   countries: ICountry[] = [];
   passwordConfirmError: string = '';
 
+  public petVariants: string[] = ['Dogs', 'Cats', 'Birds', 'Fish', 'Horses'];
+  public pets: string[] = [];
+  public wasPetsChanged: boolean = false;
+
+  onPetBoxClick(val: string) {
+    this.wasPetsChanged = true;
+    if (this.pets.includes(val)) {
+      this.pets = this.pets.filter((el) => el !== val);
+    } else {
+      this.pets.push(val);
+    }
+  }
+
+  onPetConfirm() {
+    this.authService.updateUser({ pets: this.pets }).subscribe({
+      next: (res: any) => {
+        const user = JSON.parse(localStorage.getItem('user')!);
+        const newUser = {
+          ...res,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+        };
+        this.pets = [...res.pets];
+        this.wasPetsChanged = false;
+        localStorage.setItem('user', JSON.stringify(newUser));
+        this.notificationService.showNotification(
+          'Profile updated successfully'
+        );
+      },
+    });
+  }
+
   public profileForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email]),
     firstname: new FormControl(''),
@@ -162,6 +194,10 @@ export class ProfilePageComponent implements OnInit {
     if (user.profileImage) {
       this.filePath = `${BASE_URL}/${user.profileImage}`;
       this.isImageUpdating = true;
+    }
+
+    if (user?.pets) {
+      this.pets = [...user.pets];
     }
 
     this.profileForm.patchValue({
