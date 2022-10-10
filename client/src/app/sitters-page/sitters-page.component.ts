@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IUser, SitterService } from '../sitter.services';
 
 @Component({
@@ -9,7 +10,10 @@ import { IUser, SitterService } from '../sitter.services';
 export class SittersPageComponent implements OnInit {
   public sitters!: IUser[];
 
-  constructor(private sitterService: SitterService) {}
+  constructor(
+    private sitterService: SitterService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.sitterService.sitters.subscribe({
@@ -17,5 +21,19 @@ export class SittersPageComponent implements OnInit {
         this.sitters = val;
       },
     });
+    if (!this.sitters.length) {
+      this.route.queryParams.subscribe({
+        next: (data) => {
+          const { country, pets } = data;
+          this.sitterService
+            .getFilteredSitters(country, pets.split(','))
+            .subscribe({
+              next: (res) => {
+                this.sitters = res;
+              },
+            });
+        },
+      });
+    }
   }
 }

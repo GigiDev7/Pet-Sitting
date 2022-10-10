@@ -1,1 +1,6 @@
-<p>sitters-page works!</p>
+<div>
+  <app-sitter-card
+    [sitter]="sitter"
+    *ngFor="let sitter of sitters"
+  ></app-sitter-card>
+</div>

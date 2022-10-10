@@ -46,7 +46,9 @@ export class FindSitterPageComponent implements OnInit {
     const { location } = this.locationForm.value;
     this.sitterService.getFilteredSitters(location, this.pets).subscribe({
       next: () => {
-        this.router.navigate(['sitters']);
+        this.router.navigate(['sitters'], {
+          queryParams: { country: location, pets: this.pets.join(',') },
+        });
       },
     });
   }
