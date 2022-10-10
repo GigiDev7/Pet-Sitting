@@ -1,13 +1,24 @@
 <div
-  class="bg-gray-100 h-20 border-t-[1px] flex items-center justify-between px-4"
+  class="relative bg-gray-100 h-20 border-t-[1px] flex items-center justify-between px-4"
 >
   <div class="h-full flex items-center relative">
     <input
+      [(ngModel)]="countrySearch"
+      (input)="onLocationChange($event)"
       type="text"
       placeholder="Search sitters by location"
       class="border-[2px] w-96 h-[60%] pl-10 border-gray-600 rounded-sm outline-0"
     />
     <mat-icon class="absolute left-3">search</mat-icon>
+  </div>
+  <div
+    *ngIf="countries.length"
+    class="absolute top-24 z-50 bg-gray-100 pl-3 py-4 rounded-sm"
+  >
+    <app-location-typeahead
+      (countrySelected)="onLocationClick($event)"
+      [countries]="countries"
+    ></app-location-typeahead>
   </div>
 
   <div class="mr-12 h-full flex items-center">
