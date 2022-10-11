@@ -28,6 +28,8 @@ export interface IUser {
   ratings: IRating[];
   pets: string[];
   profileImage?: string;
+  mobile?: string;
+  bio?: string;
 }
 
 @Injectable({
