@@ -63,8 +63,10 @@ export class ProfilePageComponent implements OnInit {
     country: new FormControl(''),
     city: new FormControl(''),
     memberType: new FormControl(''),
+    mobile: new FormControl(''),
     newPassword: new FormControl(''),
     confirmPassword: new FormControl(''),
+    bio: new FormControl(''),
   });
 
   handleChange(e: Event) {
@@ -130,6 +132,8 @@ export class ProfilePageComponent implements OnInit {
       'city',
       'memberType',
       'newPassword',
+      'bio',
+      'mobile',
     ];
 
     allFields.forEach((field) => {
@@ -189,6 +193,8 @@ export class ProfilePageComponent implements OnInit {
       city,
       memberType,
       dateOfBirth,
+      mobile,
+      bio,
     } = user;
 
     if (user.profileImage) {
@@ -198,6 +204,18 @@ export class ProfilePageComponent implements OnInit {
 
     if (user?.pets) {
       this.pets = [...user.pets];
+    }
+
+    if (mobile) {
+      this.profileForm.patchValue({
+        mobile,
+      });
+    }
+
+    if (bio) {
+      this.profileForm.patchValue({
+        bio,
+      });
     }
 
     this.profileForm.patchValue({
