@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService, ICountry } from '../auth/country.service';
 import { IUser, SitterService } from '../sitter.services';
 
@@ -15,9 +15,14 @@ export class SittersPageComponent implements OnInit {
   public isSelectedPetBoxShown: boolean = false;
   public countries: ICountry[] = [];
   public countrySearch: string = '';
+  public isLoading: boolean = true;
 
   toggleSelectedPetBox() {
     this.isSelectedPetBoxShown = !this.isSelectedPetBoxShown;
+  }
+
+  stopPropagate(e: Event) {
+    e.stopPropagation();
   }
 
   onLocationChange(e: Event) {
@@ -33,14 +38,45 @@ export class SittersPageComponent implements OnInit {
     this.countries = [];
   }
 
+  onPetCheck(event: Event) {
+    this.isLoading = true;
+    const target = event.target as HTMLInputElement;
+    if (target.checked) {
+      this.selectedPets.push(target.value);
+    } else {
+      this.selectedPets = this.selectedPets.filter((el) => el !== target.value);
+    }
+    this.router.navigate(['sitters'], {
+      queryParams: {
+        country: this.countrySearch,
+        pets: this.selectedPets.join(','),
+      },
+    });
+  }
+
+  onSearchClick() {
+    if (this.countrySearch === this.route.snapshot.queryParams['country']) {
+      return;
+    }
+    this.isLoading = true;
+    this.router.navigate(['sitters'], {
+      queryParams: {
+        country: this.countrySearch,
+        pets: this.selectedPets.join(','),
+      },
+    });
+  }
+
   constructor(
     private sitterService: SitterService,
     private route: ActivatedRoute,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.selectedPets = this.route.snapshot.queryParams['pets'].split(',');
+    this.countrySearch = this.route.snapshot.queryParams['country'];
 
     if (!this.countryService.countries.length) {
       this.countryService.getCountries().subscribe();
@@ -49,6 +85,9 @@ export class SittersPageComponent implements OnInit {
     this.sitterService.sitters.subscribe({
       next: (val) => {
         this.sitters = val;
+        if (this.sitters.length) {
+          this.isLoading = false;
+        }
       },
     });
     if (!this.sitters.length) {
@@ -59,7 +98,8 @@ export class SittersPageComponent implements OnInit {
             .getFilteredSitters(country, pets.split(','))
             .subscribe({
               next: (res) => {
-                this.sitters = res;
+                this.sitterService.sitters.next(res);
+                this.isLoading = false;
               },
             });
         },
