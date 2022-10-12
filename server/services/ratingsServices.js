@@ -2,6 +2,23 @@ const User = require("../models/userSchema");
 
 const giveRating = async (rating, userId, sitterId) => {
   const sitter = await User.findById(sitterId);
+
+  const oldRating = sitter.ratings.find((rating) =>
+    rating.userId.equals(userId)
+  );
+
+  if (oldRating) {
+    const newAvg =
+      (sitter.avgRating * sitter.ratings.length - oldRating.rating + rating) /
+      sitter.ratings.length;
+
+    oldRating.rating = rating;
+    sitter.avgRating = newAvg;
+
+    await sitter.save();
+    return sitter;
+  }
+
   const newRating = {
     rating,
     userId,

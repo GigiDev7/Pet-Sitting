@@ -49,4 +49,8 @@ export class SitterService {
   public getSingleSitter(sitterId: string) {
     return this.http.get(`${BASE_URL}/sitters/${sitterId}`);
   }
+
+  public rateSitter(sitterId: string, rating: number) {
+    return this.http.post(`${BASE_URL}/ratings/${sitterId}`, { rating });
+  }
 }
