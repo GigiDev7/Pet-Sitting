@@ -1,4 +1,4 @@
-const { searchSitters } = require("../services/sitterServices");
+const { searchSitters, findSitter } = require("../services/sitterServices");
 
 const getFilteredSitters = async (req, res, next) => {
   try {
@@ -10,6 +10,17 @@ const getFilteredSitters = async (req, res, next) => {
   }
 };
 
+const getSingleSitter = async (req, res, next) => {
+  try {
+    const { sitterId } = req.params;
+    const sitter = await findSitter(sitterId);
+    res.status(200).json(sitter);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getFilteredSitters,
+  getSingleSitter,
 };

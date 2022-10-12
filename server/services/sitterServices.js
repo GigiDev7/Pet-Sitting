@@ -11,6 +11,11 @@ const searchSitters = (country, pets) => {
   ]);
 };
 
+const findSitter = (sitterId) => {
+  return User.findById(sitterId, "-password -__v");
+};
+
 module.exports = {
   searchSitters,
+  findSitter,
 };

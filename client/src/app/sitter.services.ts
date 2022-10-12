@@ -45,4 +45,8 @@ export class SitterService {
       .get(`${BASE_URL}/sitters?country=${country}&pets=${pets.join(',')}`)
       .pipe(tap((res: any) => this.sitters.next(res)));
   }
+
+  public getSingleSitter(sitterId: string) {
+    return this.http.get(`${BASE_URL}/sitters/${sitterId}`);
+  }
 }
