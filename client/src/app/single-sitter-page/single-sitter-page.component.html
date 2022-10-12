@@ -2,48 +2,70 @@
   <p class="text-lg font-medium">Loading...</p>
 </div>
 
-<div *ngIf="!isLoading" class="mt-16">
-  <div class="flex items-center gap-16">
-    <img alt="profile-image" [src]="imgUrl" class="w-52 h-52 rounded-[50%]" />
-    <div class="shadow-xl p-12 flex flex-col gap-4">
-      <h1><span class="font-medium">Name:</span> {{ sitter.firstname }}</h1>
-      <p>
-        <span class="font-medium">Location:</span> {{ sitter.city }},
-        {{ sitter.country }}
-      </p>
-      <p><span class="font-medium">Mobile:</span> {{ sitter.mobile }}</p>
-      <p>
-        <span class="font-medium">Pet sitting:</span>
-        {{ sitter.pets.join(",") }}
-      </p>
-      <p><span class="font-medium">Bio:</span> {{ sitter.bio }}</p>
-      <div class="flex items-center gap-2">
-        <p class="font-medium">Rating:</p>
-        <div class="stars-outer">
-          <div [ngStyle]="{ width: starWidth }" class="stars-inner"></div>
-        </div>
+<div class="flex">
+  <div *ngIf="!isLoading" class="mt-16 flex flex-col flex-1">
+    <div class="flex items-center gap-16">
+      <img alt="profile-image" [src]="imgUrl" class="w-52 h-52 rounded-[50%]" />
+      <div class="shadow-xl p-12 flex flex-col gap-4">
+        <h1><span class="font-medium">Name:</span> {{ sitter.firstname }}</h1>
+        <p>
+          <span class="font-medium">Location:</span> {{ sitter.city }},
+          {{ sitter.country }}
+        </p>
+        <p><span class="font-medium">Mobile:</span> {{ sitter.mobile }}</p>
+        <p>
+          <span class="font-medium">Pet sitting:</span>
+          {{ sitter.pets.join(",") }}
+        </p>
+        <p><span class="font-medium">Bio:</span> {{ sitter.bio }}</p>
+        <div class="flex items-center gap-2">
+          <p class="font-medium">Rating:</p>
+          <div class="stars-outer">
+            <div [ngStyle]="{ width: starWidth }" class="stars-inner"></div>
+          </div>
 
-        <span class="text-[#f8ce0b] mt-1 text-lg font-semibold">{{
-          sitter.ratings.length
-        }}</span>
+          <span class="text-[#f8ce0b] mt-1 text-lg font-semibold">{{
+            sitter.ratings.length
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-24">
+      <p class="mb-4 font-medium" *ngIf="alreadyRated">
+        You've rated {{ sitter.firstname }} by
+        <span class="text-[#f8ce0b] font-semibold">{{ alreadyRated }}</span>
+        stars
+      </p>
+      <div class="flex items-center gap-2">
+        <p class="font-medium">Rate this sitter:</p>
+        <div>
+          <i
+            (click)="onRatingClick(1)"
+            class="fa-regular fa-star rate-stars"
+          ></i>
+          <i
+            (click)="onRatingClick(2)"
+            class="fa-regular fa-star rate-stars"
+          ></i>
+          <i
+            (click)="onRatingClick(3)"
+            class="fa-regular fa-star rate-stars"
+          ></i>
+          <i
+            (click)="onRatingClick(4)"
+            class="fa-regular fa-star rate-stars"
+          ></i>
+          <i
+            (click)="onRatingClick(5)"
+            class="fa-regular fa-star rate-stars"
+          ></i>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="mt-24">
-    <p class="mb-4 font-medium" *ngIf="alreadyRated">
-      You've rated {{ sitter.firstname }} by
-      <span class="text-[#f8ce0b] font-semibold">{{ alreadyRated }}</span> stars
-    </p>
-    <div class="flex items-center gap-2">
-      <p class="font-medium">Rate this sitter:</p>
-      <div>
-        <i (click)="onRatingClick(1)" class="fa-regular fa-star rate-stars"></i>
-        <i (click)="onRatingClick(2)" class="fa-regular fa-star rate-stars"></i>
-        <i (click)="onRatingClick(3)" class="fa-regular fa-star rate-stars"></i>
-        <i (click)="onRatingClick(4)" class="fa-regular fa-star rate-stars"></i>
-        <i (click)="onRatingClick(5)" class="fa-regular fa-star rate-stars"></i>
-      </div>
-    </div>
+  <div class="mt-16 flex justify-center flex-1">
+    <app-comment-box></app-comment-box>
   </div>
 </div>

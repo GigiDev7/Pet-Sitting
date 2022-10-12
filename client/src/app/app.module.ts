@@ -36,6 +36,7 @@ import { PetBoxComponent } from './find-sitter-page/pet-box/pet-box.component';
 import { SittersPageComponent } from './sitters-page/sitters-page.component';
 import { SitterCardComponent } from './sitters-page/sitter-card/sitter-card.component';
 import { SingleSitterPageComponent } from './single-sitter-page/single-sitter-page.component';
+import { CommentBoxComponent } from './single-sitter-page/comment-box/comment-box.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SingleSitterPageComponent } from './single-sitter-page/single-sitter-pa
     SittersPageComponent,
     SitterCardComponent,
     SingleSitterPageComponent,
+    CommentBoxComponent,
   ],
   imports: [
     BrowserModule,
