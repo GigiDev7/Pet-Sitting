@@ -31,6 +31,10 @@
   </div>
 
   <div class="mt-24">
+    <p class="mb-4 font-medium" *ngIf="alreadyRated">
+      You've rated {{ sitter.firstname }} by
+      <span class="text-[#f8ce0b] font-semibold">{{ alreadyRated }}</span> stars
+    </p>
     <div class="flex items-center gap-2">
       <p class="font-medium">Rate this sitter:</p>
       <div>

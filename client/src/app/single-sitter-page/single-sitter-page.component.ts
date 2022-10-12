@@ -13,6 +13,7 @@ export class SingleSitterPageComponent implements OnInit {
   public imgUrl!: string;
   public isLoading: boolean = true;
   public starWidth!: string;
+  public alreadyRated: number = 0;
 
   onRatingClick(rating: number) {
     const { sitterId } = this.route.snapshot.params;
@@ -22,6 +23,7 @@ export class SingleSitterPageComponent implements OnInit {
         const starPercent = (this.sitter.avgRating / 5) * 100;
         const rounded = Math.round(starPercent / 10) * 10;
         this.starWidth = `${rounded}%`;
+        this.alreadyRated = rating;
       },
     });
   }
@@ -41,6 +43,13 @@ export class SingleSitterPageComponent implements OnInit {
         const starPercent = (this.sitter.avgRating / 5) * 100;
         const rounded = Math.round(starPercent / 10) * 10;
         this.starWidth = `${rounded}%`;
+        const user = JSON.parse(localStorage.getItem('user')!);
+        const existingRating = this.sitter.ratings.find(
+          (el) => el.userId === user._id
+        );
+        if (existingRating && existingRating.rating) {
+          this.alreadyRated = existingRating.rating;
+        }
       },
     });
   }
