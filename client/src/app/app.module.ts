@@ -35,6 +35,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { PetBoxComponent } from './find-sitter-page/pet-box/pet-box.component';
 import { SittersPageComponent } from './sitters-page/sitters-page.component';
 import { SitterCardComponent } from './sitters-page/sitter-card/sitter-card.component';
+import { SingleSitterPageComponent } from './single-sitter-page/single-sitter-page.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SitterCardComponent } from './sitters-page/sitter-card/sitter-card.comp
     PetBoxComponent,
     SittersPageComponent,
     SitterCardComponent,
+    SingleSitterPageComponent,
   ],
   imports: [
     BrowserModule,

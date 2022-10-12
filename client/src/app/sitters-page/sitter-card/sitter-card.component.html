@@ -1,4 +1,7 @@
-<div class="flex flex-col items-center">
+<div
+  [routerLink]="['/sitter', sitter._id]"
+  class="flex flex-col items-center cursor-pointer"
+>
   <img class="w-44 h-44 rounded-[50%]" alt="profile-image" [src]="imageSrc" />
   <h1 class="text-teal-800 font-medium text-xl mt-4">
     {{ sitter.firstname | titlecase }}

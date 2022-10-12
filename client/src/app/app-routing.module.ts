@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { RestrictSigninGuard } from './auth/restrict-signin.guard';
 import { FindSitterPageComponent } from './find-sitter-page/find-sitter-page.component';
 import { SittersPageComponent } from './sitters-page/sitters-page.component';
+import { SingleSitterPageComponent } from './single-sitter-page/single-sitter-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'sitters',
     component: SittersPageComponent,
+  },
+  {
+    path: 'sitter/:sitterId',
+    component: SingleSitterPageComponent,
   },
 ];
 
