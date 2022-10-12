@@ -7,11 +7,13 @@
   </div>
   <div class="w-[80%] mx-auto mt-12">
     <textarea
+      [(ngModel)]="comment"
       placeholder="Leave a comment..."
       rows="4"
       class="border-[1px] pl-1 border-gray-300 rounded-sm outline-0 w-full"
     ></textarea>
     <button
+      (click)="onAddComment()"
       class="bg-teal-600 text-white hover:bg-teal-700 w-full py-2 rounded-sm mt-4"
     >
       Add comment

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IUser } from 'src/app/sitter.services';
+import { ActivatedRoute } from '@angular/router';
+import { IUser, SitterService } from 'src/app/sitter.services';
 
 @Component({
   selector: 'app-comment-box',
@@ -8,8 +9,17 @@ import { IUser } from 'src/app/sitter.services';
 })
 export class CommentBoxComponent implements OnInit {
   @Input() sitter!: IUser;
+  public comment: string = '';
 
-  constructor() {}
+  onAddComment() {
+    const { sitterId } = this.route.snapshot.params;
+    console.log(sitterId, this.comment);
+  }
+
+  constructor(
+    private route: ActivatedRoute,
+    private sitterService: SitterService
+  ) {}
 
   ngOnInit(): void {}
 }

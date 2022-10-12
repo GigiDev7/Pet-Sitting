@@ -53,4 +53,8 @@ export class SitterService {
   public rateSitter(sitterId: string, rating: number) {
     return this.http.post(`${BASE_URL}/ratings/${sitterId}`, { rating });
   }
+
+  public addComment(sitterId: string, comment: string) {
+    return this.http.post(`${BASE_URL}/comment/${sitterId}`, { comment });
+  }
 }
