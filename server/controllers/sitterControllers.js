@@ -14,7 +14,7 @@ const getSingleSitter = async (req, res, next) => {
   try {
     const { sitterId } = req.params;
     const sitter = await findSitter(sitterId);
-    res.status(200).json(sitter);
+    res.status(200).json(sitter[0]);
   } catch (error) {
     next(error);
   }

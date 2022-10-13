@@ -5,8 +5,15 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { BASE_URL } from './config/config';
 
 interface IComment {
+  _id: string;
+  sitterId: string;
   comment: string;
-  userId: string;
+  author: {
+    _id: string;
+    email: string;
+    profileImage?: string;
+    firsname: string;
+  };
 }
 
 interface IRating {

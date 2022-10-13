@@ -1,9 +1,11 @@
 <div *ngIf="sitter" class="w-full">
-  <div class="font-medium text-center" *ngIf="!sitter?.comments?.length">
+  <div class="font-medium text-center" *ngIf="!sitter.comments.length">
     No Comments!
   </div>
   <div *ngIf="sitter.comments.length">
-    <p>comment</p>
+    <div *ngFor="let comment of sitter.comments">
+      <p>{{ comment.comment }}</p>
+    </div>
   </div>
   <div class="w-[80%] mx-auto mt-12">
     <textarea
@@ -13,8 +15,9 @@
       class="border-[1px] pl-1 border-gray-300 rounded-sm outline-0 w-full"
     ></textarea>
     <button
+      [disabled]="!comment"
       (click)="onAddComment()"
-      class="bg-teal-600 text-white hover:bg-teal-700 w-full py-2 rounded-sm mt-4"
+      class="bg-teal-600 text-white disabled:bg-teal-500 hover:bg-teal-700 w-full py-2 rounded-sm mt-4"
     >
       Add comment
     </button>

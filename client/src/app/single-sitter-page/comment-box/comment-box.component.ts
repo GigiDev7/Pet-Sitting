@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IUser, SitterService } from 'src/app/sitter.services';
 
@@ -13,7 +13,11 @@ export class CommentBoxComponent implements OnInit {
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;
-    console.log(sitterId, this.comment);
+    this.sitterService.addComment(sitterId, this.comment).subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+    });
   }
 
   constructor(
