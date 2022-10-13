@@ -13,7 +13,8 @@ const getFilteredSitters = async (req, res, next) => {
 const getSingleSitter = async (req, res, next) => {
   try {
     const { sitterId } = req.params;
-    const sitter = await findSitter(sitterId);
+    const totalComments = req.query.totalComments || 1;
+    const sitter = await findSitter(sitterId, totalComments);
     res.status(200).json(sitter);
   } catch (error) {
     next(error);

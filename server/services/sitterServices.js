@@ -12,8 +12,11 @@ const searchSitters = (country, pets) => {
   ]);
 };
 
-const findSitter = async (sitterId) => {
+const findSitter = async (sitterId, totalComments = 1, limit = 5) => {
   //return User.findById(sitterId, "-password -__v").populate("comments");
+
+  const sumLimit = totalComments * limit;
+
   const sitter = await User.aggregate([
     { $match: { _id: mongoose.Types.ObjectId(sitterId) } },
     {
@@ -26,6 +29,9 @@ const findSitter = async (sitterId) => {
         foreignField: "_id",
         as: "comments",
         pipeline: [
+          {
+            $limit: sumLimit,
+          },
           {
             $lookup: {
               from: "users",
