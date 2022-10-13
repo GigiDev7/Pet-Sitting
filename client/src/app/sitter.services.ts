@@ -69,4 +69,8 @@ export class SitterService {
   public addComment(sitterId: string, comment: string) {
     return this.http.post(`${BASE_URL}/comment/${sitterId}`, { comment });
   }
+
+  public editComment(commentId: string, comment: string) {
+    return this.http.patch(`${BASE_URL}/comment/${commentId}`, { comment });
+  }
 }

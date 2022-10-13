@@ -21,13 +21,35 @@ export class CommentBoxComponent implements OnInit {
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;
-    this.sitterService.addComment(sitterId, this.comment).subscribe({
-      next: (res: any) => {
-        this.commentAdded.emit(res);
-        this.comment = '';
-        this.notificationService.showNotification('Comment added successfully');
-      },
-    });
+    if (!this.editingComentId) {
+      this.sitterService.addComment(sitterId, this.comment).subscribe({
+        next: (res: any) => {
+          this.commentAdded.emit(res);
+          this.comment = '';
+          this.notificationService.showNotification(
+            'Comment added successfully'
+          );
+        },
+      });
+    } else {
+      this.sitterService
+        .editComment(this.editingComentId, this.comment)
+        .subscribe({
+          next: () => {
+            this.comment = '';
+            this.notificationService.showNotification(
+              'Comment edited successfully'
+            );
+            this.sitterService
+              .getSingleSitter(sitterId, this.totalComments)
+              .subscribe({
+                next: (res: any) => {
+                  this.sitterUpdated.emit(res);
+                },
+              });
+          },
+        });
+    }
   }
 
   onLoadMoreComments() {
