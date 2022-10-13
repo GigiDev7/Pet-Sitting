@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/notification/notification.service';
 import { IUser, SitterService } from 'src/app/sitter.services';
 
 @Component({
@@ -16,15 +17,17 @@ export class CommentBoxComponent implements OnInit {
     const { sitterId } = this.route.snapshot.params;
     this.sitterService.addComment(sitterId, this.comment).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.commentAdded.emit(res);
+        this.comment = '';
+        this.notificationService.showNotification('Comment added successfully');
       },
     });
   }
 
   constructor(
     private route: ActivatedRoute,
-    private sitterService: SitterService
+    private sitterService: SitterService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {}
