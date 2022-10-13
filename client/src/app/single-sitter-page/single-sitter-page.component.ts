@@ -28,6 +28,10 @@ export class SingleSitterPageComponent implements OnInit {
     });
   }
 
+  onCommentAdded(event: IUser) {
+    this.sitter = event;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private sitterService: SitterService

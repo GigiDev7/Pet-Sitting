@@ -5,6 +5,8 @@ const {
   getCommentsBySitter,
 } = require("../services/commentsServices");
 
+const { findSitter } = require("../services/sitterServices");
+
 const findComments = async (req, res, next) => {
   try {
     const { sitterId } = req.params;
@@ -19,7 +21,8 @@ const createComment = async (req, res, next) => {
   try {
     const { comment } = req.body;
     const { sitterId } = req.params;
-    const sitter = await addComment(comment, req.user._id, sitterId);
+    await addComment(comment, req.user._id, sitterId);
+    const sitter = await findSitter(sitterId);
     res.status(201).json(sitter);
   } catch (error) {
     next(error);

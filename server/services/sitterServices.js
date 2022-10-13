@@ -12,9 +12,9 @@ const searchSitters = (country, pets) => {
   ]);
 };
 
-const findSitter = (sitterId) => {
+const findSitter = async (sitterId) => {
   //return User.findById(sitterId, "-password -__v").populate("comments");
-  return User.aggregate([
+  const sitter = await User.aggregate([
     { $match: { _id: mongoose.Types.ObjectId(sitterId) } },
     {
       $unset: ["password", "__v"],
@@ -63,6 +63,8 @@ const findSitter = (sitterId) => {
       },
     },
   ]);
+
+  return sitter[0];
 };
 
 module.exports = {

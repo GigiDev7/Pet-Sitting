@@ -10,12 +10,14 @@ import { IUser, SitterService } from 'src/app/sitter.services';
 export class CommentBoxComponent implements OnInit {
   @Input() sitter!: IUser;
   public comment: string = '';
+  @Output() commentAdded = new EventEmitter<IUser>();
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;
     this.sitterService.addComment(sitterId, this.comment).subscribe({
       next: (res: any) => {
         console.log(res);
+        this.commentAdded.emit(res);
       },
     });
   }
