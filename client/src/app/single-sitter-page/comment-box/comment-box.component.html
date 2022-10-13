@@ -6,17 +6,22 @@
     class="bg-gray-100 w-[80%] py-4 pl-2 mx-auto max-h-80 overflow-y-auto shadow-lg rounded-sm flex flex-col gap-8"
     *ngIf="sitter.comments.length"
   >
-    <div
-      class="flex items-center gap-2"
-      *ngFor="let comment of sitter.comments"
-    >
-      <img
-        class="w-8 h-8 rounded-[50%]"
-        alt="profile-image"
-        [src]="baseUrl + '/' + comment.author.profileImage"
-      />
-      <p class="font-medium">{{ comment.author.firstname }} :</p>
-      <p>{{ comment.comment }}</p>
+    <div class="flex flex-col" *ngFor="let comment of sitter.comments">
+      <div class="flex items-center gap-2">
+        <img
+          class="w-8 h-8 rounded-[50%]"
+          alt="profile-image"
+          [src]="baseUrl + '/' + comment.author.profileImage"
+        />
+        <p class="font-medium">{{ comment.author.firstname }} :</p>
+        <p>{{ comment.comment }}</p>
+      </div>
+      <span
+        (click)="onEditClick(comment._id, comment.comment)"
+        class="text-blue-600 text-sm ml-10 cursor-pointer"
+        *ngIf="comment.author._id === user._id"
+        >Edit</span
+      >
     </div>
   </div>
   <button
@@ -38,7 +43,7 @@
       (click)="onAddComment()"
       class="bg-teal-600 text-white disabled:bg-teal-500 hover:bg-teal-700 w-full py-2 rounded-sm mt-4"
     >
-      Add comment
+      {{ editingComentId ? "Edit" : "Add" }} comment
     </button>
   </div>
 </div>

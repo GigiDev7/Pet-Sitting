@@ -16,6 +16,8 @@ export class CommentBoxComponent implements OnInit {
   @Output() sitterUpdated = new EventEmitter<IUser>();
   baseUrl = BASE_URL;
   totalComments: number = 1;
+  user!: IUser;
+  editingComentId: string | null = null;
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;
@@ -38,11 +40,18 @@ export class CommentBoxComponent implements OnInit {
     });
   }
 
+  onEditClick(id: string, comment: string) {
+    this.editingComentId = id;
+    this.comment = comment;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private sitterService: SitterService,
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user')!);
+  }
 }
