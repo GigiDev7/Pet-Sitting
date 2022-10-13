@@ -1,4 +1,4 @@
-<div *ngIf="sitter" class="w-full">
+<div *ngIf="sitter" class="w-full flex flex-col">
   <div class="font-medium text-center" *ngIf="!sitter.comments.length">
     No Comments!
   </div>
@@ -19,6 +19,13 @@
       <p>{{ comment.comment }}</p>
     </div>
   </div>
+  <button
+    [disabled]="sitter.comments.length === sitter.totalComments"
+    (click)="onLoadMoreComments()"
+    class="self-end mr-[10%] mt-1 disabled:text-gray-300 disabled:cursor-default text-blue-600 text-md cursor-pointer"
+  >
+    Load more comments...
+  </button>
   <div class="w-[80%] mx-auto mt-12">
     <textarea
       [(ngModel)]="comment"

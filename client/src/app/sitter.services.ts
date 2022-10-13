@@ -37,6 +37,7 @@ export interface IUser {
   profileImage?: string;
   mobile?: string;
   bio?: string;
+  totalComments: number;
 }
 
 @Injectable({

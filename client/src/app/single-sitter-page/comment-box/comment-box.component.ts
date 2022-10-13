@@ -13,7 +13,9 @@ export class CommentBoxComponent implements OnInit {
   @Input() sitter!: IUser;
   public comment: string = '';
   @Output() commentAdded = new EventEmitter<IUser>();
+  @Output() sitterUpdated = new EventEmitter<IUser>();
   baseUrl = BASE_URL;
+  totalComments: number = 1;
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;
@@ -22,6 +24,16 @@ export class CommentBoxComponent implements OnInit {
         this.commentAdded.emit(res);
         this.comment = '';
         this.notificationService.showNotification('Comment added successfully');
+      },
+    });
+  }
+
+  onLoadMoreComments() {
+    const { sitterId } = this.route.snapshot.params;
+    this.totalComments++;
+    this.sitterService.getSingleSitter(sitterId, this.totalComments).subscribe({
+      next: (res: any) => {
+        this.sitterUpdated.emit(res);
       },
     });
   }

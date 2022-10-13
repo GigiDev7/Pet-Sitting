@@ -32,6 +32,10 @@ export class SingleSitterPageComponent implements OnInit {
     this.sitter = event;
   }
 
+  onSitterUpdate(event: IUser) {
+    this.sitter = event;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private sitterService: SitterService
