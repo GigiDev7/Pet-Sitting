@@ -23,12 +23,20 @@ const findSitter = async (sitterId, totalComments = 1, limit = 5) => {
       $unset: ["password", "__v"],
     },
     {
+      $addFields: {
+        totalComments: { $size: "$comments" },
+      },
+    },
+    {
       $lookup: {
         from: "comments",
         localField: "comments",
         foreignField: "_id",
         as: "comments",
         pipeline: [
+          {
+            $sort: { createdAt: -1 },
+          },
           {
             $limit: sumLimit,
           },
