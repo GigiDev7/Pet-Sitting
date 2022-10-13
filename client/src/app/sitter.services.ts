@@ -53,8 +53,12 @@ export class SitterService {
       .pipe(tap((res: any) => this.sitters.next(res)));
   }
 
-  public getSingleSitter(sitterId: string) {
-    return this.http.get(`${BASE_URL}/sitters/${sitterId}`);
+  public getSingleSitter(sitterId: string, totalComments: number = 1) {
+    return this.http.get(`${BASE_URL}/sitters/${sitterId}`, {
+      params: {
+        totalComments,
+      },
+    });
   }
 
   public rateSitter(sitterId: string, rating: number) {
