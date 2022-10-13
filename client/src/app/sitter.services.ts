@@ -12,7 +12,7 @@ interface IComment {
     _id: string;
     email: string;
     profileImage?: string;
-    firsname: string;
+    firstname: string;
   };
 }
 

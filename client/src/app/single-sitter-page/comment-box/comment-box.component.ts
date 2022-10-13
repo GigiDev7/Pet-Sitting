@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
 import { IUser, SitterService } from 'src/app/sitter.services';
+import { BASE_URL } from 'src/app/config/config';
 
 @Component({
   selector: 'app-comment-box',
@@ -12,6 +13,7 @@ export class CommentBoxComponent implements OnInit {
   @Input() sitter!: IUser;
   public comment: string = '';
   @Output() commentAdded = new EventEmitter<IUser>();
+  baseUrl = BASE_URL;
 
   onAddComment() {
     const { sitterId } = this.route.snapshot.params;

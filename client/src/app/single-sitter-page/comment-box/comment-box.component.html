@@ -2,8 +2,20 @@
   <div class="font-medium text-center" *ngIf="!sitter.comments.length">
     No Comments!
   </div>
-  <div *ngIf="sitter.comments.length">
-    <div *ngFor="let comment of sitter.comments">
+  <div
+    class="bg-gray-100 w-[80%] py-4 pl-2 mx-auto shadow-lg rounded-sm flex flex-col gap-8"
+    *ngIf="sitter.comments.length"
+  >
+    <div
+      class="flex items-center gap-2"
+      *ngFor="let comment of sitter.comments"
+    >
+      <img
+        class="w-8 h-8 rounded-[50%]"
+        alt="profile-image"
+        [src]="baseUrl + '/' + comment.author.profileImage"
+      />
+      <p class="font-medium">{{ comment.author.firstname }} :</p>
       <p>{{ comment.comment }}</p>
     </div>
   </div>
