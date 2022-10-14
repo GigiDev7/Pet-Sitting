@@ -26,40 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return next.handle(cloned);
     }
-    /* const refresh = () =>
-      this.http.post(`${BASE_URL}/user/refreshToken`, {
-        refreshToken: user.refreshToken,
-      });
-    const token = new BehaviorSubject<string>(user.accessToken);
 
-    if (user && !req.url.endsWith('/refreshToken')) {
-      const isTokenExpired = this.jwtHelper.isTokenExpired(user.accessToken);
-
-      if (isTokenExpired) {
-        refresh().subscribe({
-          next: (res: any) => {
-            user.accessToken = res.accessToken;
-            user.refreshToken = res.refreshToken;
-            localStorage.setItem('user', JSON.stringify(user));
-            token.next(res.accessToken);
-          },
-        });
-        const cloned = req.clone({
-          headers: req.headers.set('Authorization', `Bearer ${token}`),
-        });
-
-        return next.handle(cloned).pipe(delayWhen(refresh));
-      } else {
-        const cloned = req.clone({
-          headers: req.headers.set(
-            'Authorization',
-            `Bearer ${user.accessToken}`
-          ),
-        });
-        return next.handle(cloned);
-      }
-    }
- */
     return next.handle(req);
   }
 }

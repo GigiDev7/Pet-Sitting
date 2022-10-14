@@ -7,7 +7,7 @@ const HelpMessage = require("../models/helpMessageSchema");
 
 const createAccessToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-    expiresIn: "2h",
+    expiresIn: "12h",
   });
 };
 

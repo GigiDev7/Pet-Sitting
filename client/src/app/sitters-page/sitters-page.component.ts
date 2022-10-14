@@ -43,6 +43,7 @@ export class SittersPageComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     if (target.checked) {
       this.selectedPets.push(target.value);
+      console.log(this.selectedPets);
     } else {
       this.selectedPets = this.selectedPets.filter((el) => el !== target.value);
     }
@@ -52,6 +53,7 @@ export class SittersPageComponent implements OnInit {
         pets: this.selectedPets.join(','),
       },
     });
+    //this.isLoading = false;
   }
 
   onSearchClick() {
@@ -82,28 +84,28 @@ export class SittersPageComponent implements OnInit {
       this.countryService.getCountries().subscribe();
     }
 
-    this.sitterService.sitters.subscribe({
+    /* this.sitterService.sitters.subscribe({
       next: (val) => {
         this.sitters = val;
         if (this.sitters.length) {
           this.isLoading = false;
         }
       },
+    }); */
+
+    this.route.queryParams.subscribe({
+      next: (data) => {
+        const { country, pets } = data;
+        this.sitterService
+          .getFilteredSitters(country, pets.split(','))
+          .subscribe({
+            next: (res) => {
+              this.sitterService.sitters.next(res);
+              this.isLoading = false;
+              this.sitters = res;
+            },
+          });
+      },
     });
-    if (!this.sitters.length) {
-      this.route.queryParams.subscribe({
-        next: (data) => {
-          const { country, pets } = data;
-          this.sitterService
-            .getFilteredSitters(country, pets.split(','))
-            .subscribe({
-              next: (res) => {
-                this.sitterService.sitters.next(res);
-                this.isLoading = false;
-              },
-            });
-        },
-      });
-    }
   }
 }
