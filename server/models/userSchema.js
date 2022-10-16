@@ -67,6 +67,9 @@ const userSchema = new mongoose.Schema(
     pets: {
       type: [String],
     },
+    bookedDates: {
+      type: [Date],
+    },
   },
   {
     timestamps: true,

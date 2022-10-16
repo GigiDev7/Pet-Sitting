@@ -38,6 +38,11 @@ import { SitterCardComponent } from './sitters-page/sitter-card/sitter-card.comp
 import { SingleSitterPageComponent } from './single-sitter-page/single-sitter-page.component';
 import { CommentBoxComponent } from './single-sitter-page/comment-box/comment-box.component';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +80,10 @@ import { CommentBoxComponent } from './single-sitter-page/comment-box/comment-bo
     MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

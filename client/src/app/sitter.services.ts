@@ -38,6 +38,7 @@ export interface IUser {
   mobile?: string;
   bio?: string;
   totalComments: number;
+  bookedDates: Date[];
 }
 
 @Injectable({

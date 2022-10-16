@@ -32,35 +32,49 @@
     </div>
 
     <div class="mt-24">
-      <p class="mb-4 font-medium" *ngIf="alreadyRated">
-        You've rated {{ sitter.firstname }} by
-        <span class="text-[#f8ce0b] font-semibold">{{ alreadyRated }}</span>
-        stars
-      </p>
-      <div class="flex items-center gap-2">
-        <p class="font-medium">Rate this sitter:</p>
-        <div>
-          <i
-            (click)="onRatingClick(1)"
-            class="fa-regular fa-star rate-stars"
-          ></i>
-          <i
-            (click)="onRatingClick(2)"
-            class="fa-regular fa-star rate-stars"
-          ></i>
-          <i
-            (click)="onRatingClick(3)"
-            class="fa-regular fa-star rate-stars"
-          ></i>
-          <i
-            (click)="onRatingClick(4)"
-            class="fa-regular fa-star rate-stars"
-          ></i>
-          <i
-            (click)="onRatingClick(5)"
-            class="fa-regular fa-star rate-stars"
-          ></i>
+      <div>
+        <p class="mb-4 font-medium" *ngIf="alreadyRated">
+          You've rated {{ sitter.firstname }} by
+          <span class="text-[#f8ce0b] font-semibold">{{ alreadyRated }}</span>
+          stars
+        </p>
+        <div class="flex items-center gap-2">
+          <p class="font-medium">Rate this sitter:</p>
+          <div>
+            <i
+              (click)="onRatingClick(1)"
+              class="fa-regular fa-star rate-stars"
+            ></i>
+            <i
+              (click)="onRatingClick(2)"
+              class="fa-regular fa-star rate-stars"
+            ></i>
+            <i
+              (click)="onRatingClick(3)"
+              class="fa-regular fa-star rate-stars"
+            ></i>
+            <i
+              (click)="onRatingClick(4)"
+              class="fa-regular fa-star rate-stars"
+            ></i>
+            <i
+              (click)="onRatingClick(5)"
+              class="fa-regular fa-star rate-stars"
+            ></i>
+          </div>
         </div>
+      </div>
+
+      <div class="flex items-center mt-12">
+        <input
+          class="border-[1px] pl-1 py-2 rounded-sm"
+          placeholder="Check avaibility"
+          [matDatepickerFilter]="datesFilter"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </div>
     </div>
   </div>

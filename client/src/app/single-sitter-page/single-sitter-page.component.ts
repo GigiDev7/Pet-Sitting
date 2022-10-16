@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { BASE_URL } from '../config/config';
 import { IUser, SitterService } from '../sitter.services';
 
@@ -36,10 +37,22 @@ export class SingleSitterPageComponent implements OnInit {
     this.sitter = event;
   }
 
+  datesFilter(d: Date | null) {
+    return true;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private sitterService: SitterService
-  ) {}
+  ) {
+    this.datesFilter = (d: Date | null) => {
+      const dates = this.sitter.bookedDates.map((el) =>
+        new Date(el).toDateString()
+      );
+
+      return !dates.find((el) => el === d?.toDateString());
+    };
+  }
 
   ngOnInit(): void {
     const { sitterId } = this.route.snapshot.params;
